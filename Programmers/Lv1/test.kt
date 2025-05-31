@@ -1,7 +1,5 @@
 fun main() {
-    // val mp = mutableMapOf<Any, Any>()
-    val mp = mutableMapOf("a" to 1, "b" to 2)
-
-    println("a" in mp)
-    println("c" in mp)
+    val li = listOf(1, 2, 3, 4, 5)
+    val ans = li.filter { it % 2 == 0 }
+    println(ans)
 }
