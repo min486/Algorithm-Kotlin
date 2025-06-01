@@ -63,6 +63,23 @@
 >   println(li.count())  // 4
 >   println(li.count { it == 2 })  // 2
 >   ```
+>   
+> - code / toChar
+>
+>   - '문자'.code : 문자의 유니코드(Unicode) 값을 반환
+>
+>     (문자 → 정수)
+>
+>   - 정수.toChar : 유니코드 값을 입력받아 그 코드에 해당하는 문자를 반환
+>
+>     (정수 → 문자)
+>
+>   - A ~ Z 문자와 65 ~ 90 숫자 / a ~ z 문자와 97 ~ 122 숫자 서로 변환
+>
+>   ```kotlin
+>   println('A'.code)  // 65
+>   println(97.toChar())  // a
+>   ```
 >
 > - float / int / str
 >
@@ -78,8 +95,12 @@
 >   
 >   val b = "10"
 >   val bb = 3.1
+>   val bbb = "+123"
+>   val bbbb = "-123"
 >   println(b.toInt())  // 10 (kotlin.Int)
 >   println(bb.toInt())  // 3
+>   println(bbb.toInt())  // 123
+>   println(bbb.toInt())  // -123
 >   
 >   val c = 10
 >   println(c.toString())  // 10 (kotlin.String)
@@ -105,6 +126,9 @@
 >   ```kotlin
 >   val li = listOf(3, 5, 7, 5)
 >   println(li.indexOf(5))  // 1
+>   
+>   val st = "abc"
+>   println(st.indexOf("c"))  // 2
 >   ```
 >
 > - isLetter / isDigit / isLetterOrDigit
@@ -297,32 +321,23 @@
 >     println("c" in mp)  // false
 >     ```
 >
-> - maxOrNull / minOrNull
+> - minOf / maxOf
 >
->   - .maxOrNull( ) : 반복 가능한 자료형의 최댓값을 반환하는 함수
->   - .minOrNull( ) : 반복 가능한 자료형의 최솟값을 반환하는 함수
+>   - maxOf(a, b) : 2개 이상의 값 중 최댓값을 반환
+>   - minOf(a, b) : 2개 이상의 값 중 최솟값을 반환
 >
 >   ```kotlin
 >   val li = listOf(3, 5, 1)
 >   println(li.maxOrNull())  // 5
 >   println(li.minOrNull())  // 1
->   ```
->
-> - code / toChar
->
->   - '문자'.code : 문자의 유니코드(Unicode) 값을 돌려주는 함수
->
->     (문자 → 정수)
->
->   - 정수.toChar : 유니코드 값을 입력받아 그 코드에 해당하는 문자를 출력하는 함수
->
->     (정수 → 문자)
->
->   - A ~ Z 문자와 65 ~ 90 숫자 / a ~ z 문자와 97 ~ 122 숫자 서로 변환
->
->   ```kotlin
->   println('A'.code)  // 65
->   println(97.toChar())  // a
+>   
+>   val a = 10
+>   val b = 20
+>   val c = 30
+>   val mn = minOf(a, b)
+>   val mx = maxOf(a, b, c)
+>   println(mn)  // 10
+>   println(mx)  // 30
 >   ```
 >
 > - .. / until
@@ -384,18 +399,38 @@
 > - reverse / reversed
 >
 >   - 둘 다 데이터를 역순(뒤집기)으로 만듬
->   - reverse( ) : MutableList< T >에서 원형 변경, 리턴값 없음
->   - reversed( ) : MutableList< T >에서 원형 유지, 반복 가능한 reversed 객체 반환
+>   - reverse( )
+>     - 원본 변경, 반환값 없음
+>     - 변경 가능한 컬렉션에서만 사용 가능
+>     - String, List, Set 등 불변 타입에서 사용 불가
+>   - reversed( )
+>     - 원본 유지, 역순 복사본 반환
+>     - 다양한 타입에 적용 가능
 >
 >   ```kotlin
+>   // reverse
 >   val li = mutableListOf(1, 2, 3)
->   
->   val ans = li.reversed()
->   println(li)  // [1, 2, 3]
->   println(ans)  // [3, 2, 1]
->   
 >   li.reverse()
 >   println(li)  // [3, 2, 1]
+>   
+>   val li2 = listOf(1, 2, 3)
+>   li2.reverse()  // 오류
+>   
+>   val st = "abc"
+>   st.reverse()  // 오류
+>   
+>   // reversed
+>   val li = mutableListOf(1, 2, 3)
+>   val ans = li.reversed()
+>   println(ans)  // [3, 2, 1]
+>   
+>   val li2 = listOf(1, 2, 3)
+>   val ans2 = li2.reversed()
+>   println(ans2)  // [3, 2, 1]
+>   
+>   val st = "abc"
+>   val ans3 = st.reversed()
+>   println(ans3)  // cba
 >   ```
 >
 > - round
@@ -425,6 +460,35 @@
 >   li.sort()
 >   println(li)  // [1, 2, 3]
 >   ```
+>
+>
+> - sortedWith & compareBy
+>
+>
+>   - 여러 기준으로 정렬할 때 사용하는 함수 조합
+>   - compareBy 는 정렬 기준을 만들고, sortedWith 는 해당 기준대로 정렬함
+>
+>   ``````kotlin
+>   val li = listOf("sun", "bed", "car")
+>   val ans = li.sortedWith(compareBy({ it[1] }, { it }))
+>   println(ans)  // [car, bed, sun]
+>   ``````
+>
+>   👉 it[n] : 각 문자열의 n번째 문자로 1차 정렬
+>
+>   👉 it : 문자열 전체 기준으로 2차 정렬 (1차 기준이 같은 경우 알파벳순)
+>
+> - toTypedArray
+>
+>   - sortedWith 함수의 결과는 List< String >,
+>
+>     만약 함수 반환 타입이 Array< String > 이면, List → Array 변환이 필요함
+>
+>   - toTypedArray( ) 는 컬렉션을 배열(Array)로 바꿔주는 함수
+>
+>   ``````kotlin
+>   listOf("a", "b").toTypedArray()  // arrayOf("a", "b")
+>   ``````
 >
 >
 > - set
