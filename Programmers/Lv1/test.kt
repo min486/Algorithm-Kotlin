@@ -1,4 +1,4 @@
 fun main() {
-    val st = "-123"
-    println(st.toInt())
+    val a = '1'
+    println(a.toInt())
 }

@@ -85,22 +85,32 @@
 >
 >   - toFloat( ) : 숫자나 문자열을 실수형으로 변환
 >
->   - toInt( ) : 문자열 형태의 숫자나 소수점이 있는 숫자 등을 정수 형태로 반환
->
+>   - toInt( )
+>     - 문자열(String) 형태의 숫자나 소수점이 있는 숫자를 정수로 반환
+>   
+>     - 문자(Char) 형태에는 직접적으로 사용 불가, 중간에 String으로 변경해야함
+>   
+>     - 소수점이 있는 문자열에 사용 불가
+>   
 >   - toString( ) : 문자열로 변환
 >   
 >   ```kotlin
 >   val a = "3.14"
 >   println(a.toFloat())  // 3.14 (kotlin.Float)
 >   
->   val b = "10"
->   val bb = 3.1
->   val bbb = "+123"
->   val bbbb = "-123"
->   println(b.toInt())  // 10 (kotlin.Int)
->   println(bb.toInt())  // 3
->   println(bbb.toInt())  // 123
->   println(bbb.toInt())  // -123
+>   val b1 = "10"
+>   val b2 = 3.1
+>   val b3 = "+123"
+>   val b4 = "-123"
+>   println(b1.toInt())  // 10 (kotlin.Int)
+>   println(b2.toInt())  // 3
+>   println(b3.toInt())  // 123
+>   println(b4.toInt())  // -123
+>   
+>   val b5 = '1'
+>   val b6 = "3.1"
+>   println(b5.toInt())  // ❌
+>   println(b6.toInt())  // ❌
 >   
 >   val c = 10
 >   println(c.toString())  // 10 (kotlin.String)
@@ -221,9 +231,10 @@
 >
 > - map
 >
->   - .map { ... } 는 컬렉션의 각 요소에 대해 주어진 함수를 적용하고, 결과를 새로운 컬렉션으로 반환한다
->   - 컬렉션(List, Set, Array) 등 Iterable< T > 타입에 적용되는 함수
+>   - .map { ... } 는 컬렉션의 각 요소에 대해 주어진 함수를 적용하고, 결과를 새로운 컬렉션으로 반환
+>   - List, Array, String 등 Iterable< T > 에 사용 가능
 >   - 입력 타입이 IntArray, List< Int > 인 경우, 반환 타입은 List< Int >
+>   - 입력 타입이 String 인 경우, 반환 타입은 List<Char>
 >
 >   ```kotlin
 >   val li = listOf(1, 2, 3)
@@ -553,8 +564,8 @@
 >
 > - sum
 >
->   - sum( ) : 숫자형 리스트의 합을 반환한다
->   - sumOf { ... } : 각 요소를 람다식으로 변환한 값의 합을 반환한다
+>   - sum( ) : 숫자형 리스트의 합을 반환
+>   - sumOf { ... } : 각 요소를 람다식으로 변경한 값의 합을 반환한다
 >
 >   ```kotlin
 >   val nums = listOf(1, 2, 3)
@@ -598,17 +609,34 @@
 >
 > - upper / lower
 >
->   - .uppercase( ) : 문자열 내부에 모든 알파벳을 대문자로 변경
->   - .lowercase( ) : 문자열 내부에 모든 알파벳을 소문자로 변경
->   ```kotlin
->   val st = "hello"
->   
->   val ans = st.uppercase()
->   println(ans)  // HELLO
->   
->   val ans2 = st.lowercase()
->   println(ans2)  // hello
->   ```
+>   - uppercase( ) / lowercase( )
+>
+>     - 대상 : String
+>     - 문자열 내의 모든 문자를 대문자/소문자로 변경한 새로운 문자열(String)을 반환
+>
+>     ``````kotlin
+>     val st = "Hello"
+>     
+>     val ans = st.uppercase()
+>     println(ans)  // HELLO
+>     
+>     val ans2 = st.lowercase()
+>     println(ans2)  // hello
+>     ``````
+>   - uppercaseChar( ) / lowercaseChar( )
+>
+>     - 대상 : Char
+>     - 단일 문자를 대문자/소문자로 변경한 새로운 문자(Char)를 반환
+>
+>     ```kotlin
+>     val ch = 'a'
+>     val ans = ch.uppercaseChar()
+>     println(upperCh) // 'A'
+>     
+>     val ch2 = 'A'
+>     val ans2 = ch2.lowercaseChar()
+>     println(upperCh) // 'a'
+>     ```
 >
 > - isupper / islower
 >

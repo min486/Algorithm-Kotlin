@@ -9,9 +9,9 @@ class Solution {
                 idx = 0
             } else {
                 if (idx % 2 == 0) {
-                    answer += ch.uppercaseChar()
+                    answer += ch.uppercase()
                 } else {
-                    answer += ch.lowercaseChar()
+                    answer += ch.lowercase()
                 }
                 idx++
             }
