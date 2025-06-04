@@ -32,7 +32,7 @@
 >
 >   > all { ... } 는 모든 요소가 조건을 만족하면 true, 거짓이 하나라도 있으면 false
 >   >
->   > 컬렉션(List, Set, Array) 등 Iterable< T > 타입에 적용되는 함수 
+>   > 컬렉션(List, Set, Array) 등 `Iterable<T>` 타입에 적용되는 함수 
 >   
 >   ```kotlin
 >   val li = listOf(2, 4, 6)
@@ -44,7 +44,7 @@
 >
 >   > any { ... } 는 하나라도 조건을 만족하면 true
 >   >
->   > 컬렉션(List, Set, Array) 등 Iterable< T > 타입에 적용되는 함수
+>   > 컬렉션(List, Set, Array) 등 `Iterable<T>` 타입에 적용되는 함수
 >   
 >   ```kotlin
 >   val li = listOf(1, 2, 3)
@@ -56,7 +56,7 @@
 >   
 >   - .count( ) → 전체 개수
 >   - .count { 조건 } → 조건에 맞는 개수
->   - 컬렉션(List, Set, Array) 등 Iterable< T > 타입에 적용되는 함수 
+>   - 컬렉션(List, Set, Array) 등 `Iterable<T>` 타입에 적용되는 함수 
 >   
 >   ```kotlin
 >   val li = listOf(1, 2, 2, 3)
@@ -120,7 +120,7 @@
 >
 >   > find { ... } 는 조건을 만족하는 첫 요소를 반환
 >   >
->   > 컬렉션(List, Set, Array) 등 Iterable< T > 타입에 적용되는 함수 
+>   > 컬렉션(List, Set, Array) 등 `Iterable<T>` 타입에 적용되는 함수 
 >
 >   ```kotlin
 >   val li = listOf(3, 5, 7)
@@ -182,9 +182,9 @@
 >
 > - joinToString
 >
->   > joinToString(...) 는 매개변수로 들어온 구분자를 값과 값 사이에 넣어서 하나의 문자열로 바꾸어 반환하는 함수
+>   > joinToString(...) 는 매개변수로 들어온 구분자를 값과 값 사이에 넣어서 하나의 문자열로 바꾸어 반환
 >   >
->   > 컬렉션(List, Set, Array) 등 Iterable< T > 타입에 적용되는 함수
+>   > 컬렉션(List, Set, Array) 등 `Iterable<T>` 타입에 적용되는 함수
 >
 >   ```kotlin
 >   val li = listOf("a", "b", "c")
@@ -232,9 +232,9 @@
 > - map
 >
 >   - .map { ... } 는 컬렉션의 각 요소에 대해 주어진 함수를 적용하고, 결과를 새로운 컬렉션으로 반환
->   - List, Array, String 등 Iterable< T > 에 사용 가능
->   - 입력 타입이 IntArray, List< Int > 인 경우, 반환 타입은 List< Int >
->   - 입력 타입이 String 인 경우, 반환 타입은 List<Char>
+>   - List, Array, String 등 `Iterable<T>` 에 사용 가능
+>   - 입력 타입이 IntArray, `List<Int>` 인 경우, 반환 타입은 `List<Int>`
+>   - 입력 타입이 String 인 경우, 반환 타입은 `List<Char>`
 >
 >   ```kotlin
 >   val li = listOf(1, 2, 3)
@@ -246,8 +246,8 @@
 >
 >   - .filter { ... } 는 컬렉션의 각 요소에 대해 주어진 조건을 검사하고, true를 반환하는 요소만 걸러내서 새로운 컬렉션으로 반환한다
 >
->   - 컬렉션(List, Set, Array) 등 Iterable< T > 타입에 적용되는 함수
->   - 입력 타입이 IntArray, List< Int > 인 경우, 반환 타입은 List< Int >
+>   - 컬렉션(List, Set, Array) 등 `Iterable<T>` 타입에 적용되는 함수
+>   - 입력 타입이 IntArray, `List<Int>` 인 경우, 반환 타입은 `List<Int>`
 >
 >   ```kotlin
 >   val li = listOf(1, 2, 3, 4, 5)
@@ -283,8 +283,8 @@
 >
 >   - Key 리스트 만들기
 >
->     - map.keys → Set< K >
->     - 정렬, 인덱스로 접근, 변형이 필요할 때는 toList() 사용
+>     - map.keys → `Set<K>`
+>     - 정렬, 인덱스로 접근, 변형이 필요할 때는 toList( ) 사용
 >
 >     ```kotlin
 >     val mp = mutableMapOf("a" to 1, "b" to 2)
@@ -299,8 +299,8 @@
 >
 >   - Value 리스트 만들기
 >
->     - map.values → Collection< V >
->     - 정렬, 인덱스로 접근, 변형이 필요할 때는 toList() 사용
+>     - map.values → `Collection<V>`
+>     - 정렬, 인덱스로 접근, 변형이 필요할 때는 toList( ) 사용
 >
 >     ```kotlin
 >     val mp = mutableMapOf("a" to 1, "b" to 2)
@@ -332,23 +332,34 @@
 >     println("c" in mp)  // false
 >     ```
 >
-> - minOf / maxOf
+> - min / max
 >
->   - maxOf(a, b) : 2개 이상의 값 중 최댓값을 반환
->   - minOf(a, b) : 2개 이상의 값 중 최솟값을 반환
+>   - 최솟값 반환
+>     - minOrNull( )
+>       - 컬렉션 또는 배열에서 최솟값 반환
+>       - 비어있는 경우 null 반환
+>       - 지원 타입 : `Iterable<T>` `Array<T>` `IntArray` 등 다양한 배열 타입
+>     - minOf(...)
+>       - 각 요소에 특정 조건을 적용해서 최솟값 반환
+>       - 조건이 없는 `minOf(a, b)` 형식도 가능 (2개 이상의 값)
+>       - 비어있는 경우 예외 발생
+>       - 지원 타입 : 일반 값 비교 또는 `Iterable<T>.minOf { selector }`
+>   - 최댓값 반환
+>     - maxOrNull( ) : 컬렉션 또는 배열에서 최댓값 반환
+>     - maxOf(...) : 조건 적용 후 최댓값 반환 또는 2개 이상의 값 중 최댓값 반환
 >
 >   ```kotlin
->   val li = listOf(3, 5, 1)
->   println(li.maxOrNull())  // 5
->   println(li.minOrNull())  // 1
+>   val a = listOf(3, 5, 1)
+>   val b = intArrayOf(9, 2, 6)
+>   println(a.minOrNull())  // 1
+>   println(b.minOrNull())  // 2
 >   
->   val a = 10
->   val b = 20
->   val c = 30
->   val mn = minOf(a, b)
->   val mx = maxOf(a, b, c)
->   println(mn)  // 10
->   println(mx)  // 30
+>   val c = listOf(5, 3, 7)
+>   val ans = c.minOf { it * 2 }
+>   println(ans)  // 6
+>   
+>   println(minOf(3, 10))  // 3
+>   println(minOf("a", "b", "c"))  // "a"
 >   ```
 >
 > - .. / until
@@ -458,18 +469,26 @@
 > - sort / sorted
 >
 >   - 둘 다 데이터를 오름차순 또는 내림차순으로 정렬함
->   - sort( ) : 리스트에서 원형을 변경, 리턴값 없음
->   - sorted( ) : 리스트에서 원형을 변경하지 않고, 정렬된 새 리스트 반환
+>   - 원본 변경, 반환값 없음, `MutableList<T>` 타입에 사용 가능
+>     - sort( ) : 오름차순 정렬
+>     - sortDescending( ) : 내림차순 정렬
+>   - 원본 유지, 정렬된 새 List 반환, `List<T>`, `Array<T>`, `String` 등 사용 가능
+>     - sorted( ) : 오름차순 정렬
+>     - sortedDescending( ) : 내림차순 정렬
 >
 >   ```kotlin
 >   val li = mutableListOf(3, 1, 2)
->   
->   val ans = li.sorted()
->   println(li)  // [3, 1, 2]
->   println(ans)  // [1, 2, 3]
->   
 >   li.sort()
 >   println(li)  // [1, 2, 3]
+>   li.sortDescending()
+>   println(li)  // [3, 2, 1]
+>   
+>   val li2 = mutableListOf(3, 1, 2)
+>   val ans = li.sorted()
+>   val ans2 = li.sortedDescending()
+>   println(ans)  // [1, 2, 3]
+>   println(ans2)  // [3, 2, 1]
+>   println(li2)  // [3, 1, 2]
 >   ```
 >
 >
@@ -491,7 +510,7 @@
 >
 > - toTypedArray
 >
->   - sortedWith 함수의 결과는 List< String >,
+>   - sortedWith 함수의 결과는 `List<String>`,
 >
 >     만약 함수 반환 타입이 Array< String > 이면, List → Array 변환이 필요함
 >
@@ -511,7 +530,7 @@
 >
 >   - set은 중복을 허용하지 않음
 >
->   - 연산 결과는 모두 Set< T >, toList() 등으로 타입 변환 가능
+>   - 연산 결과는 모두 `Set<T>`, toList( ) 등으로 타입 변환 가능
 >
 >   - 중복 제거
 >
@@ -550,7 +569,7 @@
 >
 > - split
 >
->   > split(...) 는 괄호 안의 값을 기준으로 문자열을 나누고, 리스트(List< String >)를 반환한다
+>   > split(...) 는 괄호 안의 값을 기준으로 문자열을 나누고, 리스트(`List<String>`)를 반환
 >   
 >   ```kotlin
 >   val st = "a-b-c"
@@ -561,6 +580,22 @@
 >   val ans2 = st2.split(" ")
 >   println(ans2)  // [hello, world, android]
 >   ```
+>
+> - sqrt
+>
+>   - sqrt(...) 는 제곱근을 구할 때 사용
+>   - 인자 타입 : Double만 허용, 정수값(Int, Long) 바로 사용 불가
+>   - 반환 타입 : Double
+>
+>   ``````kotlin
+>   import kotlin.math.sqrt
+>   
+>   val x = 9.0
+>   println(sqrt(x)) // 3.0
+>   
+>   val y = 2.0
+>   println(sqrt(y)) // 1.414...
+>   ``````
 >
 > - sum
 >
@@ -623,6 +658,7 @@
 >     val ans2 = st.lowercase()
 >     println(ans2)  // hello
 >     ``````
+>
 >   - uppercaseChar( ) / lowercaseChar( )
 >
 >     - 대상 : Char
@@ -641,8 +677,8 @@
 > - isupper / islower
 >
 >   - 둘 다 문자(Char) 하나가 대문자 또는 소문자인지를 판별하는 함수
->   - Char.isUpperCase() : 문자가 대문자인지 확인
->   - Char.isLowerCase() : 문자가 소문자인지 확인
+>   - Char.isUpperCase( ) : 문자가 대문자인지 확인
+>   - Char.isLowerCase( ) : 문자가 소문자인지 확인
 >
 >   ```kotlin
 >   val ch = 'A'
@@ -673,7 +709,7 @@
 >
 > - zip
 >
->   > .zip(...) 는 두 Iterable< T >을 병렬로 묶어 Pair로 구성된 List를 만든다
+>   > .zip(...) 는 두 `Iterable<T>`을 병렬로 묶어 Pair로 구성된 List를 만든다
 >
 >   ```kotlin
 >   val a = listOf(1, 2, 3)
