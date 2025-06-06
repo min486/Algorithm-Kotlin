@@ -51,19 +51,33 @@
 >   println(li.any { it > 2 })
 >   ```
 >   
+> - average
+>
+>   - .average( ) 는 숫자 컬렉션의 평균값을 Double 타입으로 반환하는 함수
+>   - 지원 타입 : `IntArray`, `LongArray`, `DoubleArray`, `List<Int>`, `List<Long>`, `List<Double>` 등
+>   - 반환 타입 : Double
+>   
+>   ```kotlin
+>   val a = listOf(1, 2, 3)
+>   println(a.average())  // 2.0
+>   
+>   val b = intArrayOf(1, 2, 3)
+>   println(b.average())  // 2.0
+>   ```
+>   
 > - count
 >
->   
+>
 >   - .count( ) → 전체 개수
 >   - .count { 조건 } → 조건에 맞는 개수
 >   - 컬렉션(List, Set, Array) 등 `Iterable<T>` 타입에 적용되는 함수 
->   
+>
 >   ```kotlin
 >   val li = listOf(1, 2, 2, 3)
 >   println(li.count())  // 4
 >   println(li.count { it == 2 })  // 2
 >   ```
->   
+>
 > - code / toChar
 >
 >   - '문자'.code : 문자의 유니코드(Unicode) 값을 반환
@@ -339,8 +353,8 @@
 >       - 컬렉션 또는 배열에서 최솟값 반환
 >       - 비어있는 경우 null 반환
 >       - 지원 타입 : `Iterable<T>` `Array<T>` `IntArray` 등 다양한 배열 타입
->     - minOf(...)
->       - 각 요소에 특정 조건을 적용해서 최솟값 반환
+>     - minOf
+>       - .minOf { ... } 는 각 요소에 특정 조건을 적용해서 최솟값 반환
 >       - 조건이 없는 `minOf(a, b)` 형식도 가능 (2개 이상의 값)
 >       - 비어있는 경우 예외 발생
 >       - 지원 타입 : 일반 값 비교 또는 `Iterable<T>.minOf { selector }`
@@ -406,6 +420,18 @@
 >   
 >   li.clear()
 >   println(li)
+>   ```
+>
+> - repeat
+>
+>   - .repeat(...) 는 지정한 횟수만큼 문자열을 반복한 새 문자열을 반환
+>   - String 타입에만 사용 가능
+>
+>   ```kotlin
+>   val st = "*".repeat(5)
+>   val st2 = "abc".repeat(3)
+>   println(st)  // *****
+>   println(st2)  // abcabcabc
 >   ```
 >
 > - replace
@@ -507,6 +533,30 @@
 >   👉 it[n] : 각 문자열의 n번째 문자로 1차 정렬
 >
 >   👉 it : 문자열 전체 기준으로 2차 정렬 (1차 기준이 같은 경우 알파벳순)
+>
+> - take / takeLast
+>
+>
+>   - take(...)
+>
+>     - 앞에서부터 n개 요소를 가져온 새 객체 반환
+>     - String, List, Array 등에 사용 가능
+>   - takeLast(...)
+>
+>     - 뒤에서부터 n개 요소를 가져온 새 객체 반환
+>     - String, List, Array 등에 사용 가능
+>
+>   ```kotlin
+>   val st = "abcde".take(3)
+>   val li = listOf(1, 2, 3).take(2)
+>   println(st)  // abc
+>   println(li)  // [1, 2]
+>   
+>   val st2 = "abcde".takeLast(3)
+>   val li2 = listOf(1, 2, 3).takeLast(2)
+>   println(st2)  // cde
+>   println(li2)  // [2, 3]
+>   ```
 >
 > - toTypedArray
 >
