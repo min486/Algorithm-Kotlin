@@ -1,14 +1,23 @@
 fun main() {
-    val st = "abcde".takeLast(3)
-    val li = listOf(1, 2, 3).takeLast(2)
+    // val arr = Array(2) { IntArray(2) }
+    // val arr = Array(2) { StringArray("a") }
+    // val li = List(3) { List(2) { 0 } }
+    // val li = List(3) { MutableList(2) { "a" } }
     
-    val st2 = "abcde".take(3)
-    val li2 = listOf(1, 2, 3).take(2)
+    // println(arr)
+    // println(arr::class)
+    // println(arr[0]::class)
+    // println(arr[0])
 
+    // arr[0][1] = 2
 
-    println(st)
-    println(li)
+    // for (row in arr) {
+    //     println(row.joinToString(" "))
+    // }
 
-    println(st2)
-    println(li2)
+    // val arr = Array(3) { IntArray(4) { 1 } }
+    // println(arr[1][2])
+
+    val arr = Array(2) { IntArray(2) }
+    println(arr[0][1])
 }
