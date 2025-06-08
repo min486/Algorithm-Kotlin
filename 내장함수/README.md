@@ -141,6 +141,52 @@
 >   println(li.find { it > 4 })  // 5
 >   ```
 >
+> - in
+>
+>   in 은 2가지 용도로 사용된다
+>
+>   ### 1. 포함 여부 확인
+>
+>   - 컬렉션이나 문자열에 특정 값의 포함 여부를 Boolean 값으로 반환
+>
+>   - 대소문자 구분
+>
+>   - 지원 타입 : String, List, Set, Map 등
+>
+>   - 반환 타입 : Boolean
+>
+>   - in 은 연산자이지만, 내부적으로 contains( ) 함수를 호출하는 간편 문법
+>
+>     → in 을 사용하는 것이 짧고 가독성 좋음
+>
+>   ``````kotlin
+>   val li = listOf(1, 2, 3)
+>   println(2 in li)  // true
+>   println(5 in li)  // false
+>   
+>   println("ko" in "kotlin")  // true
+>   println("KO" in "kotlin")  // false
+>   ``````
+>
+>   <br>
+>
+>   ### 2. 요소 순회
+>
+>   - in 을 반복문에서 사용하는 경우, 순회 가능한 타입(Iterable)을 순회하기 위한 문법
+>   - `Iterable<T>` 혹은 Array 타입에 대해 for 반복문을 사용할 수 있게 해준다
+>
+>   ```kotlin
+>   val li = listOf(1, 2, 3)
+>   for (i in li) {
+>       println(i)
+>   }
+>   
+>   val st = "hello"
+>   for (j in st) {
+>       println(j)
+>   }
+>   ```
+>
 > - indexOf
 >
 >   > indexOf(...) 는 해당 요소가 처음 위치한 인덱스를 반환한다
@@ -258,7 +304,7 @@
 >
 > - filter
 >
->   - .filter { ... } 는 컬렉션의 각 요소에 대해 주어진 조건을 검사하고, true를 반환하는 요소만 걸러내서 새로운 컬렉션으로 반환한다
+>   - .filter { ... } 는 컬렉션의 각 요소에 대해 주어진 조건을 검사하고, true를 반환하는 요소만 걸러내서 새로운 컬렉션으로 반환
 >
 >   - 컬렉션(List, Set, Array) 등 `Iterable<T>` 타입에 적용되는 함수
 >   - 입력 타입이 IntArray, `List<Int>` 인 경우, 반환 타입은 `List<Int>`
@@ -405,21 +451,21 @@
 > - remove / removeAt / clear
 >
 >
->   - .remove( ) : 리스트에 있는 값을 이용하여 항목을 삭제, 중복 값이 있을 때 앞의 값 하나만 제거
->   - .removeAt( ) : 인덱스 위치에 있는 요소 삭제
+>   - .remove(...) : 리스트에 있는 값을 이용하여 항목을 삭제, 중복 값이 있을 때 앞의 값 하나만 제거
+>   - .removeAt(...) : 인덱스 위치에 있는 요소 삭제
 >   - .clear( ) : 리스트에 저장된 모든 요소 삭제
 >
 >   ```kotlin
 >   val li = mutableListOf(3, 1, 2, 3)
 >   
 >   li.remove(3)
->   println(li)
+>   println(li)  // [1, 2, 3]
 >   
 >   li.removeAt(0)
->   println(li)
+>   println(li)  // [2, 3]
 >   
 >   li.clear()
->   println(li)
+>   println(li)  // []
 >   ```
 >
 > - repeat
@@ -436,12 +482,14 @@
 >
 > - replace
 >
->   > .replace(old, new) 는 문자열에서 old를 new로 변경하고, 결과를 문자열로 반환
+>   - .replace(old, new) 는 문자열에서 old를 new로 변경하고, 결과를 문자열로 반환
+>   - 일치 항목을 전부 바꾸고, 횟수 제한은 지정 불가
+>   - String 타입에만 사용 가능
 >
 >   ```kotlin
->   val st = "oxoxoO"
->   val ans = st.replace("o", "z")
->   println(ans)  // zxzxzO
+>   val st = "oxoxoX"
+>   val ans = st.replace("x", "z")
+>   println(ans)  // ozozoX
 >   ```
 >
 > - reverse / reversed
@@ -462,10 +510,10 @@
 >   println(li)  // [3, 2, 1]
 >   
 >   val li2 = listOf(1, 2, 3)
->   li2.reverse()  // 오류
+>   li2.reverse()  // ❌
 >   
 >   val st = "abc"
->   st.reverse()  // 오류
+>   st.reverse()  // ❌
 >   
 >   // reversed
 >   val li = mutableListOf(1, 2, 3)
@@ -483,13 +531,18 @@
 >
 > - round
 >
->   > round(...) 는 반올림해서 반환하는 함수
->
+>   - round(...) 는 가까운 정수 값으로 반올림해서 Double 타입으로 반환
+>   - 입력 타입 : Double
+>   - 반환 타입 : Double
+>   
 >   ```kotlin
 >   import kotlin.math.round
 >   
->   val ans = round(3.6)
+>   val ans = round(3.5)
 >   println(ans)  // 4.0
+>   
+>   val ans2 = round(3.4)
+>   println(ans2)  // 3.0
 >   ```
 >
 > - sort / sorted
@@ -534,14 +587,26 @@
 >
 >   👉 it : 문자열 전체 기준으로 2차 정렬 (1차 기준이 같은 경우 알파벳순)
 >
+> - toTypedArray
+>
+>   - sortedWith 함수의 결과는 `List<String>`,
+>
+>     만약 함수 반환 타입이 `Array<String>` 이면, List → Array 변환이 필요함
+>
+>   - toTypedArray( ) 는 컬렉션을 배열(Array)로 바꿔주는 함수
+>
+>   ``````kotlin
+>   listOf("a", "b").toTypedArray()  // arrayOf("a", "b")
+>   ``````
+>
 > - take / takeLast
 >
 >
->   - take(...)
+>   - .take(...)
 >
 >     - 앞에서부터 n개 요소를 가져온 새 객체 반환
 >     - String, List, Array 등에 사용 가능
->   - takeLast(...)
+>   - .takeLast(...)
 >
 >     - 뒤에서부터 n개 요소를 가져온 새 객체 반환
 >     - String, List, Array 등에 사용 가능
@@ -558,18 +623,6 @@
 >   println(li2)  // [2, 3]
 >   ```
 >
-> - toTypedArray
->
->   - sortedWith 함수의 결과는 `List<String>`,
->
->     만약 함수 반환 타입이 Array< String > 이면, List → Array 변환이 필요함
->
->   - toTypedArray( ) 는 컬렉션을 배열(Array)로 바꿔주는 함수
->
->   ``````kotlin
->   listOf("a", "b").toTypedArray()  // arrayOf("a", "b")
->   ``````
->
 >
 > - set
 >
@@ -580,7 +633,7 @@
 >
 >   - set은 중복을 허용하지 않음
 >
->   - 연산 결과는 모두 `Set<T>`, toList( ) 등으로 타입 변환 가능
+>   - 연산 결과는 모두 `Set<T>` / toList( ) 등으로 타입 변환 가능
 >
 >   - 중복 제거
 >
@@ -619,7 +672,9 @@
 >
 > - split
 >
->   > split(...) 는 괄호 안의 값을 기준으로 문자열을 나누고, 리스트(`List<String>`)를 반환
+>   - .split(...) 는 구분자를 기준으로 잘라서 `List<String>` 형태로 반환
+>   - String 타입에만 사용 가능
+>   - 구분자를 1개 혹은 2개 이상 입력 가능
 >   
 >   ```kotlin
 >   val st = "a-b-c"
@@ -629,28 +684,32 @@
 >   val st2 = "hello world android"
 >   val ans2 = st2.split(" ")
 >   println(ans2)  // [hello, world, android]
+>   
+>   val st3 = "apple.orange:banana"
+>   val ans3 = st3.split(".", ":")
+>   println(ans3)  // [apple, orange, banana]
 >   ```
 >
 > - sqrt
 >
 >   - sqrt(...) 는 제곱근을 구할 때 사용
->   - 인자 타입 : Double만 허용, 정수값(Int, Long) 바로 사용 불가
+>   - 입력 타입 : Double만 허용, 정수값(Int, Long) 바로 사용 불가
 >   - 반환 타입 : Double
 >
 >   ``````kotlin
 >   import kotlin.math.sqrt
 >   
 >   val x = 9.0
->   println(sqrt(x)) // 3.0
+>   println(sqrt(x))  // 3.0
 >   
 >   val y = 2.0
->   println(sqrt(y)) // 1.414...
+>   println(sqrt(y))  // 1.414...
 >   ``````
 >
 > - sum
 >
->   - sum( ) : 숫자형 리스트의 합을 반환
->   - sumOf { ... } : 각 요소를 람다식으로 변경한 값의 합을 반환한다
+>   - .sum( ) : 숫자형 리스트의 합을 반환
+>   - .sumOf { ... } : 각 요소를 람다식으로 변경한 값의 합을 반환한다
 >
 >   ```kotlin
 >   val nums = listOf(1, 2, 3)
@@ -696,7 +755,7 @@
 >
 >   - uppercase( ) / lowercase( )
 >
->     - 대상 : String
+>     - 적용 가능 타입 : String
 >     - 문자열 내의 모든 문자를 대문자/소문자로 변경한 새로운 문자열(String)을 반환
 >
 >     ``````kotlin
@@ -711,37 +770,35 @@
 >
 >   - uppercaseChar( ) / lowercaseChar( )
 >
->     - 대상 : Char
+>     - 적용 타입 : Char
 >     - 단일 문자를 대문자/소문자로 변경한 새로운 문자(Char)를 반환
 >
 >     ```kotlin
 >     val ch = 'a'
 >     val ans = ch.uppercaseChar()
->     println(upperCh) // 'A'
+>     println(ans)  // 'A'
 >     
 >     val ch2 = 'A'
 >     val ans2 = ch2.lowercaseChar()
->     println(upperCh) // 'a'
+>     println(ans2)  // 'a'
 >     ```
 >
 > - isupper / islower
 >
->   - 둘 다 문자(Char) 하나가 대문자 또는 소문자인지를 판별하는 함수
->   - Char.isUpperCase( ) : 문자가 대문자인지 확인
->   - Char.isLowerCase( ) : 문자가 소문자인지 확인
+>   - 적용 가능 타입 : Char
 >
->   ```kotlin
->   val ch = 'A'
->   val ch2 = 'a'
->   
->   println(ch.isUpperCase())  // true
->   println(ch2.isUpperCase())  // false
->   
->   println(ch.isLowerCase())  // false
->   println(ch2.isLowerCase())  // true
->   ```
+>   - .isUpperCase( ) / .isLowerCase( ) : 문자가 대문자/소문자 인지 확인해서 Boolean 값으로 반환
 >
->   - 이 함수들은 Char 타입에만 적용됨
+>     ``````kotlin
+>     val ch = 'A'
+>     val ch2 = 'a'
+>     
+>     println(ch.isUpperCase())  // true
+>     println(ch2.isUpperCase())  // false
+>     
+>     println(ch.isLowerCase())  // false
+>     println(ch2.isLowerCase())  // true
+>     ``````
 >
 >   - 문자열 전체 검사하는 방법
 >
