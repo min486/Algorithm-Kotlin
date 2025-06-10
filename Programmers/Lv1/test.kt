@@ -1,8 +1,6 @@
-
 fun main() {
-    val st = "kotlin"
-    val ans = st.substring(1, 3)
-    println(ans)
-    val ans2 = st.substring(3)
-    println(ans2)
+    val li = listOf(1, 2, 2, 3)
+    println(li.count())  // 4
+    println(li.count { it == 2 })  // 2
+    println(li.count(2))  // x
 }
