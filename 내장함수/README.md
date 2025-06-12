@@ -23,7 +23,7 @@
 >
 >   ```kotlin
 >   import kotlin.math.abs
->   
+>
 >   val x = -10
 >   println(abs(x))  // 10
 >   ```
@@ -33,7 +33,7 @@
 >   > all { ... } 는 모든 요소가 조건을 만족하면 true, 거짓이 하나라도 있으면 false
 >   >
 >   > 컬렉션(List, Set, Array) 등 `Iterable<T>` 타입에 적용되는 함수 
->   
+>
 >   ```kotlin
 >   val li = listOf(2, 4, 6)
 >   println(li.all { it % 2 == 0 })  // true
@@ -45,26 +45,26 @@
 >   > any { ... } 는 하나라도 조건을 만족하면 true
 >   >
 >   > 컬렉션(List, Set, Array) 등 `Iterable<T>` 타입에 적용되는 함수
->   
+>
 >   ```kotlin
 >   val li = listOf(1, 2, 3)
 >   println(li.any { it > 2 })
 >   ```
->   
+>
 > - average
 >
 >   - .average( ) 는 숫자 컬렉션의 평균값을 Double 타입으로 반환하는 함수
 >   - 지원 타입 : `IntArray`, `LongArray`, `DoubleArray`, `List<Int>`, `List<Long>`, `List<Double>` 등
 >   - 반환 타입 : Double
->   
+>
 >   ```kotlin
 >   val a = listOf(1, 2, 3)
 >   println(a.average())  // 2.0
->   
+>
 >   val b = intArrayOf(1, 2, 3)
 >   println(b.average())  // 2.0
 >   ```
->   
+>
 > - count
 >
 >
@@ -101,13 +101,13 @@
 >
 >   - toInt( )
 >     - 문자열(String) 형태의 숫자나 소수점이 있는 숫자를 정수로 반환
->   
+>
 >     - 문자(Char) 형태에는 직접적으로 사용 불가, 중간에 String으로 변경해야함
->   
+>
 >     - 소수점이 있는 문자열에 사용 불가
->   
+>
 >   - toString( ) : 문자열로 변환
->   
+>
 >   ```kotlin
 >   val a = "3.14"
 >   println(a.toFloat())  // 3.14 (kotlin.Float)
@@ -309,7 +309,7 @@
 >   println(ans)  // [2, 4]
 >   ```
 >
-> - mapOf
+> - Map
 >
 >   - mapOf(...), mutableMapOf(...) 는 키와 값으로 이루어진 해시 테이블 생성 함수
 >
@@ -319,7 +319,6 @@
 >     val mp = mutableMapOf("a" to 1, "b" to 2)
 >     println(mp["a"])  // 1
 >     ```
->
 >
 >   - Key-Value 쌍 추가, 삭제
 >
@@ -386,6 +385,25 @@
 >     println("c" in mp)  // false
 >     ```
 >
+> - getOrDefault
+>
+>    - Map 에서 지정한 키가 존재하면 해당 값을 반환하고, 존재하지 않으면 기본값(default)을 반환하는 함수
+>    - Map, MutableMap 에서 사용 가능
+>    - null 안전성을 확보할 수 있어서 !! 사용을 피할 수 있음
+>
+>    ``````kotlin
+>    val mp = mutableMapOf<String, Int>()
+>    mp["apple"] = 2
+>    mp["banana"] = 5
+>    
+>    val a = mp.getOrDefault("apple", 0)
+>    println(a)  // 2 (키가 존재함)
+>    
+>    val b = mp.getOrDefault("orange", 0)
+>    println(b)  // 0 (키가 없음 → 기본값 반환)
+>    ``````
+>
+>
 > - min / max
 >
 >   - 최솟값 반환
@@ -423,16 +441,16 @@
 >     > MIN 에서부터 MAX 까지의 숫자를 차례대로 반환 (MAX 포함)
 >     >
 >     > (MIN <= x <= MAX) 
->   
+>
 >   - MIN until MAX
->   
+>
 >     > MIN 에서부터 MAX - 1 까지의 숫자를 차례대로 반환 (MAX 미포함)
 >     >
 >     > (MIN <= x < MAX)
 >   - ~ step GAP
 >
 >     > 각 숫자들 사이에 GAP 만큼의 차이를 둔다
->   
+>
 >   ```kotlin
 >   for (i in 1..3) print(i)  // 123
 >   for (i in 0..6 step 2) print(i)  // 0246
@@ -469,13 +487,13 @@
 >
 >   ```kotlin
 >   val li = mutableListOf(3, 1, 2, 3)
->   
+> 
 >   li.remove(3)
 >   println(li)  // [1, 2, 3]
->   
+> 
 >   li.removeAt(0)
 >   println(li)  // [2, 3]
->   
+> 
 >   li.clear()
 >   println(li)  // []
 >   ```
@@ -542,22 +560,22 @@
 >   val li = mutableListOf(1, 2, 3)
 >   li.reverse()
 >   println(li)  // [3, 2, 1]
->   
+>
 >   val li2 = listOf(1, 2, 3)
 >   li2.reverse()  // ❌
->   
+>
 >   val st = "abc"
 >   st.reverse()  // ❌
->   
+>
 >   // reversed
 >   val li = mutableListOf(1, 2, 3)
 >   val ans = li.reversed()
 >   println(ans)  // [3, 2, 1]
->   
+>
 >   val li2 = listOf(1, 2, 3)
 >   val ans2 = li2.reversed()
 >   println(ans2)  // [3, 2, 1]
->   
+>
 >   val st = "abc"
 >   val ans3 = st.reversed()
 >   println(ans3)  // cba
@@ -568,13 +586,13 @@
 >   - round(...) 는 가까운 정수 값으로 반올림해서 Double 타입으로 반환
 >   - 입력 타입 : Double
 >   - 반환 타입 : Double
->   
+>
 >   ```kotlin
 >   import kotlin.math.round
->   
+>
 >   val ans = round(3.5)
 >   println(ans)  // 4.0
->   
+>
 >   val ans2 = round(3.4)
 >   println(ans2)  // 3.0
 >   ```
@@ -650,7 +668,7 @@
 >   val li = listOf(1, 2, 3).take(2)
 >   println(st)  // abc
 >   println(li)  // [1, 2]
->   
+> 
 >   val st2 = "abcde".takeLast(3)
 >   val li2 = listOf(1, 2, 3).takeLast(2)
 >   println(st2)  // cde
@@ -681,13 +699,13 @@
 >     ```kotlin
 >     val a = setOf(1, 2, 3)
 >     val b = setOf(2, 3, 4)
->     
+>
 >     val ans = a union b
 >     print(ans)  // [1, 2, 3, 4]
->     
+>
 >     val ans2 = a intersect b
 >     print(ans2)  // [2, 3]
->     
+>
 >     val ans3 = a subtract b
 >     print(ans3)  // [1]
 >     ```
@@ -696,10 +714,10 @@
 >
 >     ```kotlin
 >     val se = mutableSetOf(1, 2, 3)
->     
+>
 >     se.add(4)
 >     println(se)  // [1, 2, 3, 4]
->     
+>
 >     se.remove(2)
 >     println(se)  // [1, 3, 4]
 >     ```
@@ -709,16 +727,16 @@
 >   - .split(...) 는 구분자를 기준으로 잘라서 `List<String>` 형태로 반환
 >   - String 타입에만 사용 가능
 >   - 구분자를 1개 혹은 2개 이상 입력 가능
->   
+>
 >   ```kotlin
 >   val st = "a-b-c"
 >   val ans = st.split("-")
 >   println(ans)  // [a, b, c]
->   
+>
 >   val st2 = "hello world android"
 >   val ans2 = st2.split(" ")
 >   println(ans2)  // [hello, world, android]
->   
+>
 >   val st3 = "apple.orange:banana"
 >   val ans3 = st3.split(".", ":")
 >   println(ans3)  // [apple, orange, banana]
@@ -732,10 +750,10 @@
 >
 >   ``````kotlin
 >   import kotlin.math.sqrt
->   
+>
 >   val x = 9.0
 >   println(sqrt(x))  // 3.0
->   
+>
 >   val y = 2.0
 >   println(sqrt(y))  // 1.414...
 >   ``````
@@ -755,19 +773,19 @@
 >
 >   - .substring(...) 는 문자열의 일부분을 잘라서 반환하는 함수
 >   - String 타입만 사용 가능
->   
+>
 >   - 기본 형태
->   
+>
 >     ```kotlin
 >     fun String.substring(startIndex: Int, endIndex: Int): String
 >     ```
->   
+>
 >     👉 startIndex는 포함, endIndex는 미포함
->   
+>
 >     👉 반환 타입은 항상 String
->   
+>
 >   - 사용 예제
->   
+>
 >     ```kotlin
 >     val st = "kotlin"
 >     val ans = st.substring(1, 3)
@@ -775,7 +793,7 @@
 >     val ans2 = st.substring(3)
 >     println(ans2)  // lin (3번째부터 끝까지)
 >     ```
->   
+>
 > - type
 >
 >   > ::class 으로 타입 확인 가능
@@ -794,10 +812,10 @@
 >
 >     ``````kotlin
 >     val st = "Hello"
->     
+>
 >     val ans = st.uppercase()
 >     println(ans)  // HELLO
->     
+>
 >     val ans2 = st.lowercase()
 >     println(ans2)  // hello
 >     ``````
@@ -811,7 +829,7 @@
 >     val ch = 'a'
 >     val ans = ch.uppercaseChar()
 >     println(ans)  // 'A'
->     
+>   
 >     val ch2 = 'A'
 >     val ans2 = ch2.lowercaseChar()
 >     println(ans2)  // 'a'
@@ -826,10 +844,10 @@
 >     ``````kotlin
 >     val ch = 'A'
 >     val ch2 = 'a'
->     
+>
 >     println(ch.isUpperCase())  // true
 >     println(ch2.isUpperCase())  // false
->     
+>
 >     println(ch.isLowerCase())  // false
 >     println(ch2.isLowerCase())  // true
 >     ``````
@@ -841,7 +859,7 @@
 >     val st = "HELLO"
 >     val ans = st.all { it.isUpperCase() }
 >     println(ans)
->     
+>   
 >     // 문자열에 소문자 하나라도 있는지
 >     val st2 = "HeLLo"
 >     val ans2 = st2.any { it.isLowerCase() }
@@ -867,7 +885,7 @@
 >
 > - 문자열 템플릿
 >
->   
+> 
 >
 > 
 >
