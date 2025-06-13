@@ -300,8 +300,10 @@
 >
 >   - .filter { ... } 는 컬렉션의 각 요소에 대해 주어진 조건을 검사하고, true를 반환하는 요소만 걸러내서 새로운 컬렉션으로 반환
 >
->   - 컬렉션(List, Set, Array) 등 `Iterable<T>` 타입에 적용되는 함수
->   - 입력 타입이 IntArray, `List<Int>` 인 경우, 반환 타입은 `List<Int>`
+>   - 지원 타입 : `List<T>`, `Array<T>`, `Set<T>`, `Map<K, V>` 등 
+>
+>   - List, Array, Set 에 적용한 경우, 반환 타입은 `List<T>`
+>   - `Map<K, V>` 에 적용한 경우, 반환 타입은 `Map<K, V>` 유지
 >
 >   ```kotlin
 >   val li = listOf(1, 2, 3, 4, 5)
@@ -407,18 +409,26 @@
 > - min / max
 >
 >   - 최솟값 반환
+>     - min
+>       - .min( ) 는 컬렉션의 최솟값 반환
+>       - 비어있는 경우 예외 발생
+>       - 지원 타입 : `List<Int>`, `IntArray`, `Set<Int>`, `Map.values` 등 
+>     
 >     - minOrNull
->       - .minOrNull( ) 는 컬렉션 또는 배열에서 최솟값 반환
+>       - .minOrNull( ) 는 컬렉션의 최솟값 반환
 >       - 비어있는 경우 null 반환
->       - 지원 타입 : `Iterable<T>` `Array<T>` `IntArray` 등 다양한 배열 타입
+>       - 지원 타입 : `List<Int>`, `IntArray`, `Set<Int>`, `Map.values` 등 
 >     - minOf
 >       - .minOf { ... } 는 각 요소에 특정 조건을 적용해서 최솟값 반환
 >       - 조건이 없는 `minOf(a, b)` 형식도 가능 (2개 이상의 값)
 >       - 비어있는 경우 예외 발생
 >       - 지원 타입 : 일반 값 비교 또는 `Iterable<T>.minOf { selector }`
+>     
 >   - 최댓값 반환
->     - maxOrNull( ) : 컬렉션 또는 배열에서 최댓값 반환
+>     - max( ) : 컬렉션의 최댓값 반환
+>     - maxOrNull( ) : 컬렉의 최댓값 반환
 >     - maxOf(...) : 조건 적용 후 최댓값 반환 또는 2개 이상의 값 중 최댓값 반환
+>
 >
 >   ```kotlin
 >   val a = listOf(3, 5, 1)
@@ -467,12 +477,12 @@
 >   - 반환 타입 : String? (nullable)
 >   - 예전부터 사용되던 방식이며 호환성이 좋아서 많이 사용됨
 >
->   ``````kotlin
+>   ```kotlin
 >   // input : 1 2
 >   fun main() {
 >       val (a, b) = readLine()!!.split(" ").map { it.toInt() }
 >   }
->   ``````
+>   ```
 >
 >   👉 readLine()!! : 컴파일러에게 null 아니라고 선언
 >
@@ -480,20 +490,19 @@
 >
 > - remove / removeAt / clear
 >
->
 >   - .remove(...) : 리스트에 있는 값을 이용하여 항목을 삭제, 중복 값이 있을 때 앞의 값 하나만 제거
 >   - .removeAt(...) : 인덱스 위치에 있는 요소 삭제
 >   - .clear( ) : 리스트에 저장된 모든 요소 삭제
 >
 >   ```kotlin
 >   val li = mutableListOf(3, 1, 2, 3)
-> 
+>   
 >   li.remove(3)
 >   println(li)  // [1, 2, 3]
-> 
+>   
 >   li.removeAt(0)
 >   println(li)  // [2, 3]
-> 
+>   
 >   li.clear()
 >   println(li)  // []
 >   ```
@@ -599,13 +608,20 @@
 >
 > - sort / sorted
 >
->   - 둘 다 데이터를 오름차순 또는 내림차순으로 정렬함
->   - 원본 변경, 반환값 없음, `MutableList<T>` 타입에 사용 가능
->     - sort( ) : 오름차순 정렬
->     - sortDescending( ) : 내림차순 정렬
->   - 원본 유지, 정렬된 새 List 반환, `List<T>`, `Array<T>`, `String` 등 사용 가능
->     - sorted( ) : 오름차순 정렬
->     - sortedDescending( ) : 내림차순 정렬
+>   - sort
+>   
+>     - 원본 변경, 반환값 없음
+>     - `MutableList<T>` 타입에 사용 가능
+>     - .sort( ) : 오름차순 정렬
+>     - .sortDescending( ) : 내림차순 정렬
+>   
+>   - sorted
+>   
+>     - 원본 유지, 정렬된 새 List 반환
+>     - `List<T>`, `Array<T>`, `Set<T>` 등 사용 가능
+>   
+>     - .sorted( ) : 오름차순 정렬
+>     - .sortedDescending( ) : 내림차순 정렬
 >
 >   ```kotlin
 >   val li = mutableListOf(3, 1, 2)
@@ -620,6 +636,10 @@
 >   println(ans)  // [1, 2, 3]
 >   println(ans2)  // [3, 2, 1]
 >   println(li2)  // [3, 1, 2]
+>   
+>   val se = setOf(3, 1, 4)
+>   val li3 = se.sorted()
+>   println(li3)  // [1, 3, 4]
 >   ```
 >
 >
@@ -629,15 +649,15 @@
 >   - 여러 기준으로 정렬할 때 사용하는 함수 조합
 >   - compareBy 는 정렬 기준을 만들고, sortedWith 는 해당 기준대로 정렬함
 >
->   ``````kotlin
+>   ```kotlin
 >   val li = listOf("sun", "bed", "car")
 >   val ans = li.sortedWith(compareBy({ it[1] }, { it }))
 >   println(ans)  // [car, bed, sun]
->   ``````
+>   ```
 >
 >   👉 it[n] : 각 문자열의 n번째 문자로 1차 정렬
 >
->   👉 it : 문자열 전체 기준으로 2차 정렬 (1차 기준이 같은 경우 알파벳순)
+>   👉 it : 문자열 전체 기준으로 2차 정렬 (1차 기준이 같은 경우 알파벳순)  
 >
 > - toTypedArray
 >
@@ -653,39 +673,36 @@
 >
 > - take / takeLast
 >
->
 >   - .take(...)
->
 >     - 앞에서부터 n개 요소를 가져온 새 객체 반환
->     - String, List, Array 등에 사용 가능
->   - .takeLast(...)
 >
+>     - String, List, Array 등에 사용 가능
+>
+>   - .takeLast(...)
 >     - 뒤에서부터 n개 요소를 가져온 새 객체 반환
 >     - String, List, Array 등에 사용 가능
 >
 >   ```kotlin
->   val st = "abcde".take(3)
->   val li = listOf(1, 2, 3).take(2)
->   println(st)  // abc
->   println(li)  // [1, 2]
-> 
->   val st2 = "abcde".takeLast(3)
->   val li2 = listOf(1, 2, 3).takeLast(2)
->   println(st2)  // cde
->   println(li2)  // [2, 3]
+>     val st = "abcde".take(3)
+>     val li = listOf(1, 2, 3).take(2)
+>     println(st)  // abc
+>     println(li)  // [1, 2]
+>   
+>     val st2 = "abcde".takeLast(3)
+>     val li2 = listOf(1, 2, 3).takeLast(2)
+>     println(st2)  // cde
+>     println(li2)  // [2, 3]
 >   ```
+>
 >
 >
 > - set
 >
->
 >   - setOf(...) : 불변(immutable) set
->
 >   - mutableSetOf(...) : 가변(mutable) set
->
 >   - set은 중복을 허용하지 않음
->
 >   - 연산 결과는 모두 `Set<T>` / toList( ) 등으로 타입 변환 가능
+>
 >
 >   - 중복 제거
 >
@@ -699,13 +716,13 @@
 >     ```kotlin
 >     val a = setOf(1, 2, 3)
 >     val b = setOf(2, 3, 4)
->
+>     
 >     val ans = a union b
 >     print(ans)  // [1, 2, 3, 4]
->
+>     
 >     val ans2 = a intersect b
 >     print(ans2)  // [2, 3]
->
+>     
 >     val ans3 = a subtract b
 >     print(ans3)  // [1]
 >     ```
@@ -714,10 +731,10 @@
 >
 >     ```kotlin
 >     val se = mutableSetOf(1, 2, 3)
->
+>     
 >     se.add(4)
 >     println(se)  // [1, 2, 3, 4]
->
+>     
 >     se.remove(2)
 >     println(se)  // [1, 3, 4]
 >     ```
@@ -732,11 +749,11 @@
 >   val st = "a-b-c"
 >   val ans = st.split("-")
 >   println(ans)  // [a, b, c]
->
+>   
 >   val st2 = "hello world android"
 >   val ans2 = st2.split(" ")
 >   println(ans2)  // [hello, world, android]
->
+>   
 >   val st3 = "apple.orange:banana"
 >   val ans3 = st3.split(".", ":")
 >   println(ans3)  // [apple, orange, banana]
@@ -750,10 +767,10 @@
 >
 >   ``````kotlin
 >   import kotlin.math.sqrt
->
+>   
 >   val x = 9.0
 >   println(sqrt(x))  // 3.0
->
+>   
 >   val y = 2.0
 >   println(sqrt(y))  // 1.414...
 >   ``````
@@ -829,7 +846,7 @@
 >     val ch = 'a'
 >     val ans = ch.uppercaseChar()
 >     println(ans)  // 'A'
->   
+>     
 >     val ch2 = 'A'
 >     val ans2 = ch2.lowercaseChar()
 >     println(ans2)  // 'a'
@@ -859,7 +876,7 @@
 >     val st = "HELLO"
 >     val ans = st.all { it.isUpperCase() }
 >     println(ans)
->   
+>     
 >     // 문자열에 소문자 하나라도 있는지
 >     val st2 = "HeLLo"
 >     val ans2 = st2.any { it.isLowerCase() }
