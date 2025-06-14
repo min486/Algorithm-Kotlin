@@ -387,6 +387,17 @@
 >     println("c" in mp)  // false
 >     ```
 >
+>   - Key, Value 단일 접근
+>
+>     - Map 을 순회할 때 it.key 와 it.value 로 각 요소에 접근할 수 있다
+>
+>     ``````kotlin
+>     val map = mapOf("apple" to 2, "banana" to 3)
+>     
+>     map.filter { it.value >= 3 }
+>     map.forEach { println("${it.key} : ${it.value}") }
+>     ``````
+>
 > - getOrDefault
 >
 >    - Map 에서 지정한 키가 존재하면 해당 값을 반환하고, 존재하지 않으면 기본값(default)을 반환하는 함수
@@ -646,8 +657,11 @@
 > - sortedWith & compareBy
 >
 >
->   - 여러 기준으로 정렬할 때 사용하는 함수 조합
+>   - 두 가지 함수 조합으로 오름차순, 내림차순 모두 구현 가능
 >   - compareBy 는 정렬 기준을 만들고, sortedWith 는 해당 기준대로 정렬함
+>   - 내림차순은 부호(-)를 붙여 처리
+>   - 지원 타입 : `List<T>`, `MutableList<T>`
+>   - 반환 타입 : `List<T>`
 >
 >   ```kotlin
 >   val li = listOf("sun", "bed", "car")
@@ -657,7 +671,33 @@
 >
 >   👉 it[n] : 각 문자열의 n번째 문자로 1차 정렬
 >
->   👉 it : 문자열 전체 기준으로 2차 정렬 (1차 기준이 같은 경우 알파벳순)  
+>   👉 it : 문자열 전체 기준으로 2차 정렬 (1차 기준이 같은 경우 알파벳순) 
+>
+>   ```kotlin
+>   data class Student(
+>       val name: String,
+>       val korean: Int,
+>       val english: Int,
+>   )
+>   
+>   val students = listOf(
+>       Student("Junkyu", 50, 60),
+>       Student("Sangkeun", 50, 60),
+>       Student("Sunyoung", 80, 70),
+>       Student("Donghyuk", 80, 60)
+>   )
+>   
+>   val li = students.sortedWith(
+>       compareBy(
+>           { -it.korean },  // 국어 점수 내림차순
+>           { it.english },  // 영어 점수 오름차순
+>           { it.name }      // 이름 오름차순
+>       )
+>   )
+>   
+>   val ans = li.map { it.name }
+>   println(ans)  // [Donghyuk, Sunyoung, Junkyu, Sangkeun]
+>   ```
 >
 > - toTypedArray
 >
@@ -698,11 +738,14 @@
 >
 > - set
 >
->   - setOf(...) : 불변(immutable) set
->   - mutableSetOf(...) : 가변(mutable) set
->   - set은 중복을 허용하지 않음
->   - 연산 결과는 모두 `Set<T>` / toList( ) 등으로 타입 변환 가능
 >
+>   - setOf(...) : 불변(immutable) set
+>
+>   - mutableSetOf(...) : 가변(mutable) set
+>
+>   - set은 중복을 허용하지 않음
+>
+>   - 연산 결과는 모두 `Set<T>` / toList( ) 등으로 타입 변환 가능
 >
 >   - 중복 제거
 >
@@ -738,6 +781,7 @@
 >     se.remove(2)
 >     println(se)  // [1, 3, 4]
 >     ```
+>
 >
 > - split
 >
