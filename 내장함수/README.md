@@ -95,39 +95,48 @@
 >   println(97.toChar())  // a
 >   ```
 >
-> - float / int / str
->
->   - toFloat( ) : 숫자나 문자열을 실수형으로 변환
+> - int / str / double
 >
 >   - toInt( )
->     - 문자열(String) 형태의 숫자나 소수점이 있는 숫자를 정수로 반환
+>     - 정수 또는 정수 형태의 문자열을 Int 타입으로 변환
 >
->     - 문자(Char) 형태에는 직접적으로 사용 불가, 중간에 String으로 변경해야함
+>     - 실수형은 정수 부분만 잘림 (소수점 이하 제거)
 >
->     - 소수점이 있는 문자열에 사용 불가
+>     - 문자(Char) 형태에는 직접 사용 불가 → toString( ) 후 변환 필요
 >
->   - toString( ) : 문자열로 변환
+>     - "3.14" 같은 소수점 포함 문자열은 사용 불가
+>
+>   - toString( ) 
+>     - 어떤 타입이든 문자열로 변환 (Int, Double, Char 등)
+>
+>   - toDouble( )
+>     - 정수, 실수 또는 숫자 형태의 문자열을 Double 타입(실수형)으로 변환
+>     - 소수점이 있는 문자열도 변환 가능
+>
 >
 >   ```kotlin
->   val a = "3.14"
->   println(a.toFloat())  // 3.14 (kotlin.Float)
+>   val a1 = "10"
+>   val a2 = 3.1
+>   val a3 = "+123"
+>   val a4 = "-123"
+>   println(a1.toInt())  // 10 (kotlin.Int)
+>   println(a2.toInt())  // 3
+>   println(a3.toInt())  // 123
+>   println(a4.toInt())  // -123
 >   
->   val b1 = "10"
->   val b2 = 3.1
->   val b3 = "+123"
->   val b4 = "-123"
->   println(b1.toInt())  // 10 (kotlin.Int)
->   println(b2.toInt())  // 3
->   println(b3.toInt())  // 123
->   println(b4.toInt())  // -123
+>   val a5 = '1'
+>   val a6 = "3.14"
+>   println(a5.toInt())  // ❌
+>   println(a6.toInt())  // ❌
 >   
->   val b5 = '1'
->   val b6 = "3.1"
->   println(b5.toInt())  // ❌
->   println(b6.toInt())  // ❌
+>   val b = 10
+>   println(b.toString())  // 10 (kotlin.String)
 >   
->   val c = 10
->   println(c.toString())  // 10 (kotlin.String)
+>   val c1 = 10
+>   println(c1.toDouble())  // 10.0
+>   val c2 = "3.14"
+>   println(c2.toDouble())  // 3.14
+>   println(c2::class)      // class kotlin.Double
 >   ```
 >
 > - find
@@ -300,16 +309,30 @@
 >
 >   - .filter { ... } 는 컬렉션의 각 요소에 대해 주어진 조건을 검사하고, true를 반환하는 요소만 걸러내서 새로운 컬렉션으로 반환
 >
->   - 지원 타입 : `List<T>`, `Array<T>`, `Set<T>`, `Map<K, V>` 등 
+>   - 지원 타입 : `List<T>`, `Array<T>`, `Set<T>`, `Map<K, V>`, `String`
 >
 >   - List, Array, Set 에 적용한 경우, 반환 타입은 `List<T>`
 >   - `Map<K, V>` 에 적용한 경우, 반환 타입은 `Map<K, V>` 유지
+>   - String 에 적용한 경우, 반환 타입은 `String`
+>   - 예시 : 짝수 필터링
 >
->   ```kotlin
->   val li = listOf(1, 2, 3, 4, 5)
->   val ans = li.filter { it % 2 == 0 }
->   println(ans)  // [2, 4]
->   ```
+>     ``````kotlin
+>     val li = listOf(1, 2, 3, 4, 5)
+>     val ans = li.filter { it % 2 == 0 }
+>     println(ans)  // [2, 4]
+>     ``````
+>
+>   - 예시 : 문자열에서 숫자만 필터링
+>
+>     ``````kotlin
+>     val st = "A913Z"
+>     val ans = st.filter { ch -> ch.isDigit() }
+>     println(ans)  // 913
+>     ``````
+>
+>     👉 `filter { ch -> ch.isDigit() }` 는 문자열 st의 각 문자 ch가 숫자인지 여부를 검사
+>
+>     👉 숫자인 문자만 남기고 나머지는 제거한 결과가 반환됨
 >
 > - Map
 >
@@ -603,34 +626,34 @@
 >
 > - round
 >
->   - round(...) 는 가까운 정수 값으로 반올림해서 Double 타입으로 반환
->   - 입력 타입 : Double
->   - 반환 타입 : Double
->
+>   - 함수 : `round(x: Double): Double`
+>   - 소수점 첫째 자리에서 반올림한 값을 Double 타입으로 반환
+>   - Int, Long 같은 정수 타입은 사용 불가, 실수형으로 변환 필요
+> - 다른 소수점 자리에서 반올림하려면 직접 구현 필요
+>   
 >   ```kotlin
->   import kotlin.math.round
->
->   val ans = round(3.5)
->   println(ans)  // 4.0
->
->   val ans2 = round(3.4)
->   println(ans2)  // 3.0
+> import kotlin.math.round
+>   
+>   val a = round(3.5)  // 4.0
+> val b = round(3.4)  // 3.0
+>   val c = round(3.toDouble())  // 3.0
+>   val d = round(3)  // ❌ 
 >   ```
 >
 > - sort / sorted
 >
 >   - sort
->   
+>
 >     - 원본 변경, 반환값 없음
 >     - `MutableList<T>` 타입에 사용 가능
 >     - .sort( ) : 오름차순 정렬
 >     - .sortDescending( ) : 내림차순 정렬
->   
+>
 >   - sorted
->   
+>
 >     - 원본 유지, 정렬된 새 List 반환
 >     - `List<T>`, `Array<T>`, `Set<T>` 등 사용 가능
->   
+>
 >     - .sorted( ) : 오름차순 정렬
 >     - .sortedDescending( ) : 내림차순 정렬
 >
@@ -821,14 +844,49 @@
 >
 > - sum
 >
->   - .sum( ) : 숫자형 리스트의 합을 반환
->   - .sumOf { ... } : 각 요소를 람다식으로 변경한 값의 합을 반환한다
+>   - .sum( )
 >
->   ```kotlin
->   val nums = listOf(1, 2, 3)
->   println(nums.sum())  // 6
->   println(nums.sumOf { it * 2 })  // 12
->   ```
+>     - 숫자형 요소(Int, Long, Double)를 갖는 컬렉션의 합계를 반환
+>     - `List<Int>`, `List<Long>`, `List<Double>` 등에서 사용 가능
+>
+>     ``````kotlin
+>     val li = listOf(1, 2, 3)
+>     println(li.sum())  // 6
+>     
+>     val li2 = mutableListOf(1.2, 2.3, 3.1)
+>     println(li2.sum())  // 6.6
+>     ``````
+>
+>   - .sumOf { ... }
+>
+>     - 컬렉션의 각 요소를 람다식으로 변환한 후, 그 결과값의 총합을 반환
+>
+>     - 요소 타입이 숫자가 아니어도 사용 가능, 람다식의 결과값이 숫자형이면 합산 가능
+>
+>     - `List<Item>`, `List<String>`, `String` 등에서 사용 가능
+>
+>     - 예시 : 객체 리스트에서 특정 속성의 총합 구하기
+>
+>       ``````kotlin
+>       data class Item(val name: String, val price: Int)
+>       
+>       val li = listOf(Item("a", 1000), Item("b", 2000))
+>       println(li.sumOf { it.price })  // 3000
+>       ``````
+>
+>     - 예시 : 문자열 숫자의 합
+>
+>       ```kotlin
+>       val st = "12345"
+>       val sum = st.sumOf { it.toString().toInt() }
+>       println(sum)  // 15
+>       ```
+>
+>     - 예시 : 문자열 길이 총합
+>
+>       ```kotlin
+>       listOf("a", "bb", "ccc").sumOf { it.length }  // 6
+>       ```
 >
 > - substring
 >
@@ -845,7 +903,7 @@
 >
 >     👉 반환 타입은 항상 String
 >
->   - 사용 예제
+>   - 
 >
 >     ```kotlin
 >     val st = "kotlin"
