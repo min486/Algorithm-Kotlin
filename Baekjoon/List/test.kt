@@ -1,7 +1,11 @@
 fun main() {
-    val ans = listOf(1, 2, 3)
-    println(ans.sum())
+    val st = "kot lin"
 
-    val ans2 = mutableListOf(1.2, 2.3, 3.1)
-    println(ans2.sum())
+    println(st.startsWith("k"))  // true
+    println(st.startsWith("kot"))  // false (대소문자 구분)
+    println(st.endsWith("kotl"))    // true
+
+    println(st.endsWith("lin"))    // false
+    println(st.endsWith(" lin"))    // false
+    println(st.endsWith(" liN"))    // false
 }

@@ -70,13 +70,14 @@
 >
 >   - .count( ) → 전체 개수
 >   - .count { 조건 } → 조건에 맞는 개수
->   - 컬렉션(List, Set, Array) 등 `Iterable<T>` 타입에 적용되는 함수 
+>   - 컬렉션(List, Set, Array) 등 `Iterable<T>` 타입에 적용되는 함수
 >
 >   ```kotlin
 >   val li = listOf(1, 2, 2, 3)
 >   println(li.count())  // 4
 >   println(li.count { it == 2 })  // 2
 >   ```
+>
 >
 > - code / toChar
 >
@@ -112,8 +113,7 @@
 >   - toDouble( )
 >     - 정수, 실수 또는 숫자 형태의 문자열을 Double 타입(실수형)으로 변환
 >     - 소수점이 있는 문자열도 변환 가능
->
->
+>   
 >   ```kotlin
 >   val a1 = "10"
 >   val a2 = 3.1
@@ -157,7 +157,7 @@
 >   ```kotlin
 >   val li = listOf(3, 5, 7, 5)
 >   println(li.indexOf(5))  // 1
->   
+>
 >   val st = "abc"
 >   println(st.indexOf("c"))  // 2
 >   ```
@@ -184,7 +184,7 @@
 >   val li = listOf(1, 2, 3)
 >   println(2 in li)  // true
 >   println(5 in li)  // false
->   
+>
 >   println("ko" in "kotlin")  // true
 >   println("KO" in "kotlin")  // false
 >   ``````
@@ -199,7 +199,7 @@
 >   for (i in li) {
 >       println(i)
 >   }
->   
+>
 >   val st = "hello"
 >   for (j in st) {
 >       println(j)
@@ -219,26 +219,26 @@
 >    val a3 = "s520"
 >    val a4 = "code_test"
 >    val a5 = "code test"
->    
+>
 >    println(a1.all { it.isLetter() })  // true
 >    println(a2.all { it.isLetter() })  // true
 >    println(a3.all { it.isLetter() })  // false (숫자 포함)
 >    println(a4.all { it.isLetter() })  // false (기호 포함)
 >    println(a5.all { it.isLetter() })  // false (공백 포함)
->    
+>
 >    val b1 = "123"
 >    val b2 = "010-1234-5678"
 >    val b3 = "전화번호010"
->    
+>
 >    println(b1.all { it.isDigit() })  // true
 >    println(b2.all { it.isDigit() })  // false
 >    println(b3.all { it.isDigit() })  // false
->    
+>
 >    val c1 = "123"
 >    val c2 = "010-1234-5678"
 >    val c3 = "전화번호010"
 >    val c4 = "Phone 010"
->    
+>
 >    println(c1.all { it.isLetterOrDigit() })  // true
 >    println(c2.all { it.isLetterOrDigit() })  // false
 >    println(c3.all { it.isLetterOrDigit() })  // true
@@ -264,7 +264,7 @@
 >   ```kotlin
 >   val st = "hello"
 >   println(st.length)  // 5
->   
+>
 >   val li = listOf(1, 2)
 >   println(li.size)  // 2
 >   ```
@@ -284,10 +284,10 @@
 >
 >   ```kotlin
 >   val li = mutableListOf(1, 2)
->   
+>
 >   li.add(3)
 >   println(li)  // [1, 2, 3]
->   
+>
 >   li.add(1, 10)
 >   println(li)  // [1, 10, 2, 3]
 >   ```
@@ -354,7 +354,7 @@
 >     mp["name"] = "pp"
 >     mp[3] = listOf(1, 2)
 >     println(mp)  // {1=a, 2=b, name=pp, 3=[1, 2]}
->     
+>
 >     mp.remove(2)
 >     println(mp)  // {1=a, name=pp, 3=[1, 2]}
 >     ```
@@ -366,10 +366,10 @@
 >
 >     ```kotlin
 >     val mp = mutableMapOf("a" to 1, "b" to 2)
->     
+>
 >     val li = mp.keys.toList()
 >     println(li)  // [a, b]
->     
+>
 >     for (k in mp.keys) {
 >         print(k)  // ab
 >     }
@@ -382,10 +382,10 @@
 >
 >     ```kotlin
 >     val mp = mutableMapOf("a" to 1, "b" to 2)
->     
+>
 >     val li = mp.values.toList()
 >     println(li)  // [1, 2]
->     
+>
 >     for (v in mp.values) {
 >         print(v)  // 12
 >     }
@@ -395,7 +395,7 @@
 >
 >     ```kotlin
 >     val mp = mutableMapOf("a" to 1, "b" to 2)
->     
+>
 >     for ((k, v) in mp) {
 >         println("$k - $v")  // a - 1
 >     }                       // b - 2
@@ -405,7 +405,7 @@
 >
 >     ```kotlin
 >     val mp = mutableMapOf("a" to 1, "b" to 2)
->     
+>
 >     println("a" in mp)  // true
 >     println("c" in mp)  // false
 >     ```
@@ -416,7 +416,7 @@
 >
 >     ``````kotlin
 >     val map = mapOf("apple" to 2, "banana" to 3)
->     
+>   
 >     map.filter { it.value >= 3 }
 >     map.forEach { println("${it.key} : ${it.value}") }
 >     ``````
@@ -447,7 +447,7 @@
 >       - .min( ) 는 컬렉션의 최솟값 반환
 >       - 비어있는 경우 예외 발생
 >       - 지원 타입 : `List<Int>`, `IntArray`, `Set<Int>`, `Map.values` 등 
->     
+>
 >     - minOrNull
 >       - .minOrNull( ) 는 컬렉션의 최솟값 반환
 >       - 비어있는 경우 null 반환
@@ -457,13 +457,12 @@
 >       - 조건이 없는 `minOf(a, b)` 형식도 가능 (2개 이상의 값)
 >       - 비어있는 경우 예외 발생
 >       - 지원 타입 : 일반 값 비교 또는 `Iterable<T>.minOf { selector }`
->     
+>
 >   - 최댓값 반환
 >     - max( ) : 컬렉션의 최댓값 반환
 >     - maxOrNull( ) : 컬렉의 최댓값 반환
 >     - maxOf(...) : 조건 적용 후 최댓값 반환 또는 2개 이상의 값 중 최댓값 반환
->
->
+>   
 >   ```kotlin
 >   val a = listOf(3, 5, 1)
 >   val b = intArrayOf(9, 2, 6)
@@ -518,9 +517,9 @@
 >   }
 >   ```
 >
->   👉 readLine()!! : 컴파일러에게 null 아니라고 선언
+>   👉 `readLine()!!` : 컴파일러에게 null 아니라고 선언
 >
->   👉 split(" ").map { it.toInt() } : 문자열을 공백 기준으로 나누고 정수로 변환
+>   👉 `split(" ").map { it.toInt() }` : 문자열을 공백 기준으로 나누고 정수로 변환
 >
 > - remove / removeAt / clear
 >
@@ -530,13 +529,13 @@
 >
 >   ```kotlin
 >   val li = mutableListOf(3, 1, 2, 3)
->   
+>
 >   li.remove(3)
 >   println(li)  // [1, 2, 3]
->   
+>
 >   li.removeAt(0)
 >   println(li)  // [2, 3]
->   
+>
 >   li.clear()
 >   println(li)  // []
 >   ```
@@ -630,10 +629,10 @@
 >   - 소수점 첫째 자리에서 반올림한 값을 Double 타입으로 반환
 >   - Int, Long 같은 정수 타입은 사용 불가, 실수형으로 변환 필요
 > - 다른 소수점 자리에서 반올림하려면 직접 구현 필요
->   
+>
 >   ```kotlin
 > import kotlin.math.round
->   
+>
 >   val a = round(3.5)  // 4.0
 > val b = round(3.4)  // 3.0
 >   val c = round(3.toDouble())  // 3.0
@@ -680,21 +679,29 @@
 > - sortedWith & compareBy
 >
 >
->   - 두 가지 함수 조합으로 오름차순, 내림차순 모두 구현 가능
->   - compareBy 는 정렬 기준을 만들고, sortedWith 는 해당 기준대로 정렬함
->   - 내림차순은 부호(-)를 붙여 처리
->   - 지원 타입 : `List<T>`, `MutableList<T>`
->   - 반환 타입 : `List<T>`
+>     - 두 가지 함수 조합으로 오름차순, 내림차순 모두 구현 가능
 >
->   ```kotlin
+>
+>     - compareBy 는 정렬 기준을 만들고, sortedWith 는 해당 기준대로 정렬함
+>
+>
+>     - 내림차순은 부호(-)를 붙여 처리
+>
+>
+>     - 지원 타입 : `List<T>`, `MutableList<T>`
+>
+>
+>     - 반환 타입 : `List<T>`
+>
+>   ``````kotlin
 >   val li = listOf("sun", "bed", "car")
 >   val ans = li.sortedWith(compareBy({ it[1] }, { it }))
 >   println(ans)  // [car, bed, sun]
->   ```
+>   ``````
 >
 >   👉 it[n] : 각 문자열의 n번째 문자로 1차 정렬
 >
->   👉 it : 문자열 전체 기준으로 2차 정렬 (1차 기준이 같은 경우 알파벳순) 
+>   👉 it : 문자열 전체 기준으로 2차 정렬 (1차 기준이 같은 경우 알파벳순)
 >
 >   ```kotlin
 >   data class Student(
@@ -757,53 +764,52 @@
 >     println(li2)  // [2, 3]
 >   ```
 >
->
->
 > - set
 >
->
 >   - setOf(...) : 불변(immutable) set
->
 >   - mutableSetOf(...) : 가변(mutable) set
->
 >   - set은 중복을 허용하지 않음
->
 >   - 연산 결과는 모두 `Set<T>` / toList( ) 등으로 타입 변환 가능
 >
->   - 중복 제거
 >
->     ```kotlin
->     val se = mutableSetOf(1, 2, 2)
->     println(se)  // [1, 2]
->     ```
+>     - 중복 제거
 >
->   - 합집합, 교집합, 차집합
+>       ```kotlin
+>       val se = mutableSetOf(1, 2, 2)
+>       println(se)  // [1, 2]
+>       ```
 >
->     ```kotlin
->     val a = setOf(1, 2, 3)
->     val b = setOf(2, 3, 4)
->     
->     val ans = a union b
->     print(ans)  // [1, 2, 3, 4]
->     
->     val ans2 = a intersect b
->     print(ans2)  // [2, 3]
->     
->     val ans3 = a subtract b
->     print(ans3)  // [1]
->     ```
 >
->   - 원소 추가, 삭제
 >
->     ```kotlin
->     val se = mutableSetOf(1, 2, 3)
->     
->     se.add(4)
->     println(se)  // [1, 2, 3, 4]
->     
->     se.remove(2)
->     println(se)  // [1, 3, 4]
->     ```
+>     - 합집합, 교집합, 차집합
+>
+>       ```kotlin
+>       val a = setOf(1, 2, 3)
+>       val b = setOf(2, 3, 4)
+>       
+>       val ans = a union b
+>       print(ans)  // [1, 2, 3, 4]
+>       
+>       val ans2 = a intersect b
+>       print(ans2)  // [2, 3]
+>       
+>       val ans3 = a subtract b
+>       print(ans3)  // [1]
+>       ```
+>
+>
+>
+>     - 원소 추가, 삭제
+>
+>       ```kotlin
+>       val se = mutableSetOf(1, 2, 3)
+>       
+>       se.add(4)
+>       println(se)  // [1, 2, 3, 4]
+>       
+>       se.remove(2)
+>       println(se)  // [1, 3, 4]
+>       ```
 >
 >
 > - split
@@ -852,7 +858,7 @@
 >     ``````kotlin
 >     val li = listOf(1, 2, 3)
 >     println(li.sum())  // 6
->     
+>
 >     val li2 = mutableListOf(1.2, 2.3, 3.1)
 >     println(li2.sum())  // 6.6
 >     ``````
@@ -869,7 +875,7 @@
 >
 >       ``````kotlin
 >       data class Item(val name: String, val price: Int)
->       
+>
 >       val li = listOf(Item("a", 1000), Item("b", 2000))
 >       println(li.sumOf { it.price })  // 3000
 >       ``````
@@ -891,6 +897,7 @@
 > - substring
 >
 >   - .substring(...) 는 문자열의 일부분을 잘라서 반환하는 함수
+>
 >   - String 타입만 사용 가능
 >
 >   - 기본 형태
@@ -903,15 +910,35 @@
 >
 >     👉 반환 타입은 항상 String
 >
->   - 
+>   - 예시
 >
->     ```kotlin
+>     ``````kotlin
 >     val st = "kotlin"
 >     val ans = st.substring(1, 3)
 >     println(ans)  // ot (1, 2번째 문자)
 >     val ans2 = st.substring(3)
 >     println(ans2)  // lin (3번째부터 끝까지)
->     ```
+>     ``````
+>
+> - startsWith / endsWith
+>
+>
+>   - 문자열이 특정 문자나 문자열로 시작하는지/끝나는지 확인하는 함수
+>
+>   - 지원 타입 : String
+>   - 반환 타입 : Boolean
+>
+>   ```kotlin
+>   val st = "kot lin"
+>   
+>   println(st.startsWith("k"))    // true
+>   println(st.startsWith("kot"))  // true 
+>   println(st.endsWith("kotl"))   // false
+>   
+>   println(st.endsWith("lin"))    // true
+>   println(st.endsWith(" lin"))   // ture
+>   println(st.endsWith(" liN"))   // false (대소문자 구분)
+>   ```
 >
 > - type
 >
