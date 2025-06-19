@@ -628,17 +628,17 @@
 >   - 함수 : `round(x: Double): Double`
 >   - 소수점 첫째 자리에서 반올림한 값을 Double 타입으로 반환
 >   - Int, Long 같은 정수 타입은 사용 불가, 실수형으로 변환 필요
-> - 다른 소수점 자리에서 반올림하려면 직접 구현 필요
->
+>   - 다른 소수점 자리에서 반올림하려면 직접 구현 필요
+>   
 >   ```kotlin
-> import kotlin.math.round
->
+>   import kotlin.math.round
+>   
 >   val a = round(3.5)  // 4.0
-> val b = round(3.4)  // 3.0
+>   val b = round(3.4)  // 3.0
 >   val c = round(3.toDouble())  // 3.0
 >   val d = round(3)  // ❌ 
 >   ```
->
+>   
 > - sort / sorted
 >
 >   - sort
@@ -767,49 +767,47 @@
 > - set
 >
 >   - setOf(...) : 불변(immutable) set
+>
 >   - mutableSetOf(...) : 가변(mutable) set
+>
 >   - set은 중복을 허용하지 않음
+>
 >   - 연산 결과는 모두 `Set<T>` / toList( ) 등으로 타입 변환 가능
 >
+>   - 중복 제거
 >
->     - 중복 제거
+>     ```kotlin
+>     val se = mutableSetOf(1, 2, 2)
+>     println(se)  // [1, 2]
+>     ```
 >
->       ```kotlin
->       val se = mutableSetOf(1, 2, 2)
->       println(se)  // [1, 2]
->       ```
+>   - 합집합, 교집합, 차집합
 >
+>     ```kotlin
+>     val a = setOf(1, 2, 3)
+>     val b = setOf(2, 3, 4)
+>     
+>     val ans = a union b
+>     print(ans)  // [1, 2, 3, 4]
+>     
+>     val ans2 = a intersect b
+>     print(ans2)  // [2, 3]
+>     
+>     val ans3 = a subtract b
+>     print(ans3)  // [1]
+>     ```
 >
+>   - 원소 추가, 삭제
 >
->     - 합집합, 교집합, 차집합
->
->       ```kotlin
->       val a = setOf(1, 2, 3)
->       val b = setOf(2, 3, 4)
->       
->       val ans = a union b
->       print(ans)  // [1, 2, 3, 4]
->       
->       val ans2 = a intersect b
->       print(ans2)  // [2, 3]
->       
->       val ans3 = a subtract b
->       print(ans3)  // [1]
->       ```
->
->
->
->     - 원소 추가, 삭제
->
->       ```kotlin
->       val se = mutableSetOf(1, 2, 3)
->       
->       se.add(4)
->       println(se)  // [1, 2, 3, 4]
->       
->       se.remove(2)
->       println(se)  // [1, 3, 4]
->       ```
+>     ```kotlin
+>     val se = mutableSetOf(1, 2, 3)
+>     
+>     se.add(4)
+>     println(se)  // [1, 2, 3, 4]
+>     
+>     se.remove(2)
+>     println(se)  // [1, 3, 4]
+>     ```
 >
 >
 > - split
