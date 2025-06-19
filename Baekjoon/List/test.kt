@@ -1,5 +1,5 @@
 fun main() {
-    val sb = StringBuilder("hello")
-    sb.setCharAt(0, 'H')
-    println(sb)
+    val st = "abc"
+    val ans2 = st.map { it.uppercaseChar() }
+    println(ans2)
 }

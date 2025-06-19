@@ -247,9 +247,11 @@
 >
 > - joinToString
 >
->   > joinToString(...) 는 구분자를 값과 값 사이에 넣어서 하나의 문자열로 바꾸어 반환
->   >
->   > 컬렉션(List, Set, Array) 등 `Iterable<T>` 타입에 적용되는 함수
+>   - .joinToString(...) 는 요소들 사이에 구분자를 넣어서 하나의 문자열로 반환
+>
+>   - 지원 타입 :  `List<T>`, `MutableList<T>`, `Set<T>`, `Array<T>`
+>
+>   - 미지원 타입 : `String`
 >
 >   ```kotlin
 >   val li = listOf("a", "b", "c")
@@ -264,56 +266,56 @@
 >   ```kotlin
 >   val st = "hello"
 >   println(st.length)  // 5
->
+>   
 >   val li = listOf(1, 2)
 >   println(li.size)  // 2
 >   ```
 >
-> - list
->
->   > listOf( ), mutableListOf( ) 는 반복 가능한 자료형을 입력받아 리스트로 반환하는 함수
->
->   ```kotlin
->   val li = mutableListOf(1, 2, 3)
->   ```
->
 > - add
 >
->   - add(...) : 리스트의 끝에 값을 추가하는 함수
->   - add(index, value) : 리스트의 index 위치에 값(value)을 추가하는 함수
+>   - .add(...) : 리스트의 끝에 값을 추가하는 함수
+>   - .add(index, value) : 리스트의 index 위치에 값(value)을 삽입하는 함수
+>   - 지원 타입 : `MutableList<T>`, `MutableSet<T>`, `ArrayDeque<T>` 등 변경 가능한 컬렉션
 >
 >   ```kotlin
 >   val li = mutableListOf(1, 2)
->
+>   
 >   li.add(3)
 >   println(li)  // [1, 2, 3]
->
+>   
 >   li.add(1, 10)
 >   println(li)  // [1, 10, 2, 3]
 >   ```
 >
 > - map
 >
->   - .map { ... } 는 컬렉션의 각 요소에 대해 주어진 함수를 적용하고, 결과를 새로운 컬렉션으로 반환
->   - List, Array, String 등 `Iterable<T>` 에 사용 가능
->   - 입력 타입이 IntArray, `List<Int>` 인 경우, 반환 타입은 `List<Int>`
->   - 입력 타입이 String 인 경우, 반환 타입은 `List<Char>`
+>   - .map { ... } 는 컬렉션의 각 요소에 대해 주어진 함수를 적용하고, 결과를 새로운 리스트로 반환
+>   - 지원 타입 : `List<T>`, `Set<T>`, `Array<T>`, `String` 등
+>   - 반환 타입 : `List<R>`
+>   - `String` 에 적용한 경우 → 반환 타입은 `List<Char>`
 >
 >   ```kotlin
 >   val li = listOf(1, 2, 3)
 >   val ans = li.map { it * it }
 >   println(ans)  // [1, 4, 9]
+>   
+>   val st = "abc"
+>   val ans2 = st.map { it.uppercaseChar() }     
+>   println(ans2)  // [A, B, C] 
 >   ```
 >
 > - filter
 >
 >   - .filter { ... } 는 컬렉션의 각 요소에 대해 주어진 조건을 검사하고, true를 반환하는 요소만 걸러내서 새로운 컬렉션으로 반환
 >
->   - 지원 타입 : `List<T>`, `Array<T>`, `Set<T>`, `Map<K, V>`, `String`
+>   - 지원 타입 : `List<T>`, `Array<T>`, `Set<T>`, `Map<K, V>`, `String` 등
 >
->   - List, Array, Set 에 적용한 경우, 반환 타입은 `List<T>`
->   - `Map<K, V>` 에 적용한 경우, 반환 타입은 `Map<K, V>` 유지
->   - String 에 적용한 경우, 반환 타입은 `String`
+>   - 반환 타입 :
+>
+>     - List, Array, Set → `List<T>`
+>     - String → `List<Char>`
+>     - Map<K, V> → `Map<K, V>`
+>
 >   - 예시 : 짝수 필터링
 >
 >     ``````kotlin
@@ -416,7 +418,7 @@
 >
 >     ``````kotlin
 >     val map = mapOf("apple" to 2, "banana" to 3)
->   
+>     
 >     map.filter { it.value >= 3 }
 >     map.forEach { println("${it.key} : ${it.value}") }
 >     ``````
