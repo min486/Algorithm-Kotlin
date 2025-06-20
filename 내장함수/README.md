@@ -19,7 +19,7 @@
 >
 > - abs
 >
->   > abs(...) 는 정수(Int), 실수(Float, Double) 타입의 숫자에서 절댓값을 반환하는 함수
+>   > `abs(...)` 는 정수(Int), 실수(Float, Double) 타입의 숫자에서 절댓값을 반환하는 함수
 >
 >   ```kotlin
 >   import kotlin.math.abs
@@ -30,7 +30,7 @@
 >
 > - all
 >
->   > all { ... } 는 모든 요소가 조건을 만족하면 true, 거짓이 하나라도 있으면 false
+>   > `.all { ... }` 는 모든 요소가 조건을 만족하면 true, 거짓이 하나라도 있으면 false
 >   >
 >   > 컬렉션(List, Set, Array) 등 `Iterable<T>` 타입에 적용되는 함수 
 >
@@ -42,7 +42,7 @@
 >
 > - any
 >
->   > any { ... } 는 하나라도 조건을 만족하면 true
+>   > `.any { ... }` 는 하나라도 조건을 만족하면 true
 >   >
 >   > 컬렉션(List, Set, Array) 등 `Iterable<T>` 타입에 적용되는 함수
 >
@@ -53,7 +53,7 @@
 >
 > - average
 >
->   - .average( ) 는 숫자 컬렉션의 평균값을 Double 타입으로 반환하는 함수
+>   - `.average()` 는 숫자 컬렉션의 평균값을 Double 타입으로 반환하는 함수
 >   - 지원 타입 : `IntArray`, `LongArray`, `DoubleArray`, `List<Int>`, `List<Long>`, `List<Double>` 등
 >   - 반환 타입 : Double
 >
@@ -68,8 +68,8 @@
 > - count
 >
 >
->   - .count( ) → 전체 개수
->   - .count { 조건 } → 조건에 맞는 개수
+>   - `.count()` → 전체 개수
+>   - `.count { 조건 }` → 조건에 맞는 개수
 >   - 컬렉션(List, Set, Array) 등 `Iterable<T>` 타입에 적용되는 함수
 >
 >   ```kotlin
@@ -81,11 +81,11 @@
 >
 > - code / toChar
 >
->   - '문자'.code : 문자의 유니코드(Unicode) 값을 반환
+>   - '문자'`.code` : 문자의 유니코드(Unicode) 값을 반환
 >
 >     (문자 → 정수)
 >
->   - 정수.toChar : 유니코드 값을 입력받아 그 코드에 해당하는 문자를 반환
+>   - 정수`.toChar()` : 유니코드 값을 입력받아 그 코드에 해당하는 문자를 반환
 >
 >     (정수 → 문자)
 >
@@ -141,7 +141,7 @@
 >
 > - find
 >
->   - find { ... } 는 조건을 만족하는 첫 요소를 반환
+>   - `.find { ... }` 는 조건을 만족하는 첫 요소를 반환
 >   - 컬렉션(List, Set, Array) 등 `Iterable<T>` 타입에 적용되는 함수
 >
 >   ```kotlin
@@ -151,7 +151,7 @@
 >
 > - indexOf
 >
->   - indexOf(...) 는 해당 요소가 처음 위치한 인덱스를 반환
+>   - `.indexOf(...)` 는 해당 요소가 처음 위치한 인덱스를 반환
 >   - List, String 타입에서 사용 가능
 >
 >   ```kotlin
@@ -209,9 +209,9 @@
 > - isLetter / isDigit / isLetterOrDigit
 >
 >    - 셋 다 Char 타입에 적용되며, String에 직접 적용은 안된다 (순회하며 적용해야함)
->    - .isLetter( ) : 문자열의 구성이 알파벳 또는 한글인지 확인 (문자열에 공백, 기호, 숫자가 있을시 false 리턴)
->    - .isDigit( ) : 문자열의 구성이 숫자인지 확인
->    - .isLetterOrDigit( ) : 문자열의 구성이 알파벳(한글) 또는 숫자인지 확인
+>    - `.isLetter()` : 문자열의 구성이 알파벳 또는 한글인지 확인 (문자열에 공백, 기호, 숫자가 있을시 false 리턴)
+>    - `.isDigit()` : 문자열의 구성이 숫자인지 확인
+>    - `.isLetterOrDigit()` : 문자열의 구성이 알파벳(한글) 또는 숫자인지 확인
 >
 >    ```kotlin
 >    val a1 = "A"
@@ -247,7 +247,7 @@
 >
 > - joinToString
 >
->   - .joinToString(...) 는 요소들 사이에 구분자를 넣어서 하나의 문자열로 반환
+>   - `.joinToString(...)` 는 요소들 사이에 구분자를 넣어서 하나의 문자열로 반환
 >
 >   - 지원 타입 :  `List<T>`, `MutableList<T>`, `Set<T>`, `Array<T>`
 >
@@ -260,8 +260,8 @@
 >
 > - length / size
 >
->   - .length : 문자열의 길이(요소의 전체 개수)를 반환
->   - .size : 리스트, 배열 등의 길이 반환
+>   - `.length` : 문자열의 길이(요소의 전체 개수)를 반환
+>   - `.size` : 리스트, 배열 등의 길이 반환
 >
 >   ```kotlin
 >   val st = "hello"
@@ -273,8 +273,8 @@
 >
 > - add
 >
->   - .add(...) : 리스트의 끝에 값을 추가하는 함수
->   - .add(index, value) : 리스트의 index 위치에 값(value)을 삽입하는 함수
+>   - `.add(...)` : 리스트의 끝에 값을 추가하는 함수
+>   - `.add(index, value)` : 리스트의 index 위치에 값(value)을 삽입하는 함수
 >   - 지원 타입 : `MutableList<T>`, `MutableSet<T>`, `ArrayDeque<T>` 등 변경 가능한 컬렉션
 >
 >   ```kotlin
@@ -289,7 +289,7 @@
 >
 > - map
 >
->   - .map { ... } 는 컬렉션의 각 요소에 대해 주어진 함수를 적용하고, 결과를 새로운 리스트로 반환
+>   - `.map { ... }` 는 컬렉션의 각 요소에 대해 주어진 함수를 적용하고, 결과를 새로운 리스트로 반환
 >   - 지원 타입 : `List<T>`, `Set<T>`, `Array<T>`, `String` 등
 >   - 반환 타입 : `List<R>`
 >   - `String` 에 적용한 경우 → 반환 타입은 `List<Char>`
@@ -306,7 +306,7 @@
 >
 > - filter
 >
->   - .filter { ... } 는 컬렉션의 각 요소에 대해 주어진 조건을 검사하고, true를 반환하는 요소만 걸러내서 새로운 컬렉션으로 반환
+>   - `.filter { ... }` 는 컬렉션의 각 요소에 대해 주어진 조건을 검사하고, true를 반환하는 요소만 걸러내서 새로운 컬렉션으로 반환
 >
 >   - 지원 타입 : `List<T>`, `Array<T>`, `Set<T>`, `Map<K, V>`, `String` 등
 >
@@ -425,6 +425,7 @@
 >
 > - getOrDefault
 >
+>    - `.getOrDefault(K, default)`
 >    - Map 에서 지정한 키가 존재하면 해당 값을 반환하고, 존재하지 않으면 기본값(default)을 반환하는 함수
 >    - Map, MutableMap 에서 사용 가능
 >    - null 안전성을 확보할 수 있어서 !! 사용을 피할 수 있음
@@ -446,16 +447,16 @@
 >
 >   - 최솟값 반환
 >     - min
->       - .min( ) 는 컬렉션의 최솟값 반환
+>       - `.min()` 는 컬렉션의 최솟값 반환
 >       - 비어있는 경우 예외 발생
 >       - 지원 타입 : `List<Int>`, `IntArray`, `Set<Int>`, `Map.values` 등 
 >
 >     - minOrNull
->       - .minOrNull( ) 는 컬렉션의 최솟값 반환
+>       - `.minOrNull()` 는 컬렉션의 최솟값 반환
 >       - 비어있는 경우 null 반환
 >       - 지원 타입 : `List<Int>`, `IntArray`, `Set<Int>`, `Map.values` 등 
 >     - minOf
->       - .minOf { ... } 는 각 요소에 특정 조건을 적용해서 최솟값 반환
+>       - `.minOf { ... }` 는 각 요소에 특정 조건을 적용해서 최솟값 반환
 >       - 조건이 없는 `minOf(a, b)` 형식도 가능 (2개 이상의 값)
 >       - 비어있는 경우 예외 발생
 >       - 지원 타입 : 일반 값 비교 또는 `Iterable<T>.minOf { selector }`
@@ -508,7 +509,7 @@
 > - readLine
 >
 >
->   - readLine( ) 는 Kotlin에서 한 줄 입력 받을 때 사용
+>   - `readLine()` 는 Kotlin에서 한 줄 입력 받을 때 사용
 >   - 반환 타입 : String? (nullable)
 >   - 예전부터 사용되던 방식이며 호환성이 좋아서 많이 사용됨
 >
@@ -525,9 +526,9 @@
 >
 > - remove / removeAt / clear
 >
->   - .remove(...) : 리스트에 있는 값을 이용하여 항목을 삭제, 중복 값이 있을 때 앞의 값 하나만 제거
->   - .removeAt(...) : 인덱스 위치에 있는 요소 삭제
->   - .clear( ) : 리스트에 저장된 모든 요소 삭제
+>   - `.remove(...)` : 리스트에 있는 값을 이용하여 항목을 삭제, 중복 값이 있을 때 앞의 값 하나만 제거
+>   - `.removeAt(...)` : 인덱스 위치에 있는 요소 삭제
+>   - `.clear( )` : 리스트에 저장된 모든 요소 삭제
 >
 >   ```kotlin
 >   val li = mutableListOf(3, 1, 2, 3)
@@ -578,9 +579,9 @@
 >
 > - replace
 >
->   - .replace(old, new) 는 문자열에서 old를 new로 변경하고, 결과를 문자열로 반환
+>   - `.replace(old, new)` 는 문자열에서 old를 new로 변경하고, 결과를 문자열로 반환
 >   - 일치 항목을 전부 바꾸고, 횟수 제한은 지정 불가
->   - String 타입에만 사용 가능
+>   - 지원 타입 : String
 >
 >   ```kotlin
 >   val st = "oxoxoX"
@@ -591,11 +592,11 @@
 > - reverse / reversed
 >
 >   - 둘 다 데이터를 역순(뒤집기)으로 만듬
->   - reverse( )
+>   - `.reverse()`
 >     - 원본 변경, 반환값 없음
 >     - 변경 가능한 컬렉션에서만 사용 가능
 >     - String, List, Set 등 불변 타입에서 사용 불가
->   - reversed( )
+>   - `.reversed()`
 >     - 원본 유지, 역순 복사본 반환
 >     - 다양한 타입에 적용 가능
 >
@@ -627,7 +628,7 @@
 >
 > - round
 >
->   - 함수 : `round(x: Double): Double`
+>   - `round(x: Double): Double`
 >   - 소수점 첫째 자리에서 반올림한 값을 Double 타입으로 반환
 >   - Int, Long 같은 정수 타입은 사용 불가, 실수형으로 변환 필요
 >   - 다른 소수점 자리에서 반올림하려면 직접 구현 필요
@@ -646,17 +647,17 @@
 >   - sort
 >
 >     - 원본 변경, 반환값 없음
->     - `MutableList<T>` 타입에 사용 가능
->     - .sort( ) : 오름차순 정렬
->     - .sortDescending( ) : 내림차순 정렬
+>     - 지원 타입 : `MutableList<T>`
+>     - `.sort()` : 오름차순 정렬
+>     - `.sortDescending()` : 내림차순 정렬
 >
 >   - sorted
 >
 >     - 원본 유지, 정렬된 새 List 반환
->     - `List<T>`, `Array<T>`, `Set<T>` 등 사용 가능
+>     - 지원 타입 : `List<T>`, `Array<T>`, `Set<T>` 등
 >
->     - .sorted( ) : 오름차순 정렬
->     - .sortedDescending( ) : 내림차순 정렬
+>     - `.sorted()` : 오름차순 정렬
+>     - `.sortedDescending()` : 내림차순 정렬
 >
 >   ```kotlin
 >   val li = mutableListOf(3, 1, 2)
@@ -745,14 +746,14 @@
 >
 > - take / takeLast
 >
->   - .take(...)
+>   - `.take(...)`
 >     - 앞에서부터 n개 요소를 가져온 새 객체 반환
 >
->     - String, List, Array 등에 사용 가능
+>     - 지원 타입 : String, List, Array 등
 >
->   - .takeLast(...)
+>   - `.takeLast(..)`
 >     - 뒤에서부터 n개 요소를 가져온 새 객체 반환
->     - String, List, Array 등에 사용 가능
+>     - 지원 타입 : String, List, Array 등
 >
 >   ```kotlin
 >     val st = "abcde".take(3)
@@ -814,8 +815,8 @@
 >
 > - split
 >
->   - .split(...) 는 구분자를 기준으로 잘라서 `List<String>` 형태로 반환
->   - String 타입에만 사용 가능
+>   - `.split(...)` 는 구분자를 기준으로 잘라서 `List<String>` 형태로 반환
+>   - 지원 타입 : String
 >   - 구분자를 1개 혹은 2개 이상 입력 가능
 >
 >   ```kotlin
